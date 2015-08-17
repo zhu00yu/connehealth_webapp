@@ -1,0 +1,238 @@
+﻿
+
+<form role="form">
+    <div class="row">
+        <div class="col-md-12">
+            <div panel-box-directive>
+                <div panel-box-header-directive header-title="基础信息"></div>
+                <div panel-box-content-directive>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>机构名称</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="basicInfoDto.practiceInfo.name" class="form-control form-white" placeholder="机构名称">
+                                    <i class="icon-user"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>机构分类</label>
+                                <select select2-directive ng-model="basicInfoDto.practiceInfo.type" init-value="{{basicInfoDto.practiceInfo.type}}" class="form-control form-white" data-placeholder="机构分类">
+                                    <option>诊所</option>
+                                    <option>医院</option>
+                                    <option>检验机构</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>机构性质</label>
+                                <div class="prepend-icon">
+                                    <div class="icheck-inline">
+                                        <label><input type="radio" name="basicInfoDto.practiceInfo.publicOrg" ng-value="true" ng-model="basicInfoDto.practiceInfo.publicOrg" data-radio="iradio_square-blue"> 公立</label>
+                                        <label><input type="radio" name="basicInfoDto.practiceInfo.publicOrg" ng-value="false" ng-model="basicInfoDto.practiceInfo.publicOrg" data-radio="iradio_square-blue"> 私立</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>执业医师人数</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="basicInfoDto.practiceInfo.numberOfDoctors" class="form-control form-white" placeholder="执业医师人数">
+                                    <i class="icon-user"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>床位数</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="basicInfoDto.practiceInfo.numberOfBeds" class="form-control form-white" placeholder="床位数">
+                                    <i class="icon-lock"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>连锁机构</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <input type="checkbox" ng-model="basicInfoDto.practiceInfo.chainPractice" data-checkbox="icheckbox_square-blue">
+                                    </span>
+                                    <input type="text" ng-model="basicInfoDto.practiceInfo.chainPracticeName" class="form-control form-white" placeholder="连锁机构名称">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>详细地址</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="basicInfoDto.practiceInfo.address" class="form-control form-white" placeholder="详细地址">
+                                    <i class="icon-user"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>机构地区</label>
+                                <div location-directive province-id="basicInfoDto.practiceInfo.provinceId" city-id="basicInfoDto.practiceInfo.cityId" region-id="basicInfoDto.practiceInfo.districtId" layout="1"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>机构电话</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="basicInfoDto.practiceInfo.businessPhone" class="form-control form-white" placeholder="机构电话">
+                                    <i class="icon-user"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        <div panel-box-directive>
+            <div panel-box-header-directive header-title="执业许可证"></div>
+            <div panel-box-content-directive>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>机构登记号</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="basicInfoDto.practiceInfo.practiceLicenseCode" class="form-control form-white" placeholder="机构登记号">
+                                        <i class="icon-user"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>发证机关</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="basicInfoDto.practiceInfo.issuer" class="form-control form-white" placeholder="发证机关">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>法人代表</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="basicInfoDto.practiceInfo.legalPerson" class="form-control form-white" placeholder="法人代表">
+                                        <i class="icon-user"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>主要负责人</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="basicInfoDto.practiceInfo.principal" class="form-control form-white" placeholder="主要负责人">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>证书有效期</label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="prepend-icon">
+                                                <input type="text" ng-model="basicInfoDto.practiceInfo.effectiveDate" class="form-control form-white">
+                                                <i>从</i>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="prepend-icon">
+                                                <input type="text" ng-model="basicInfoDto.practiceInfo.expiryDate" class="form-control form-white">
+                                                <i>至</i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-4">
+                        <div image-file-input-directive label="上传执业许可证" fileurl="basicInfoDto.practiceLicenseFileUrl" fileid="basicInfoDto.practiceLicenseFileId" filedata="basicInfoDto.practiceLicenseFileData" fileread="basicInfoDto.practiceLicenseFileRead"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div panel-box-directive>
+                    <div panel-box-header-directive header-title="营业执照"></div>
+                    <div panel-box-content-directive>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>企业工商营业执照注册号</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="basicInfoDto.practiceInfo.businessLicenseCode" class="form-control form-white" placeholder="营业执照注册号">
+                                        <i class="icon-user"></i>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>注册资金</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="basicInfoDto.practiceInfo.registeredFund" class="form-control form-white" placeholder="注册资金">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div image-file-input-directive label="上传营业执照" fileurl="basicInfoDto.businessLicenseFileUrl" fileid="basicInfoDto.businessLicenseFileId" filedata="basicInfoDto.businessLicenseFileData" fileread="basicInfoDto.businessLicenseFileRead"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-md-6">
+                <div panel-box-directive>
+                    <div panel-box-header-directive header-title="其他证照"></div>
+                    <div panel-box-content-directive>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div image-file-input-directive label="上传机构代码证" fileurl="basicInfoDto.organizationCodeFileUrl" fileid="basicInfoDto.organizationCodeFileId" filedata="basicInfoDto.organizationCodeFileData" fileread="basicInfoDto.organizationCodeFileRead"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div image-file-input-directive label="上传税务登记证" fileurl="basicInfoDto.taxEnrolFileUrl" fileid="basicInfoDto.taxEnrolFileId" filedata="basicInfoDto.taxEnrolFileData" fileread="basicInfoDto.taxEnrolFileRead"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-right">
+                        <button type="button" ng-click="submitPracticeBasicInfo(basicInfoDto)" class="btn btn-primary">提交</button>
+                        <button type="button" class="btn">返回</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

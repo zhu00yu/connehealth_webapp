@@ -45,8 +45,8 @@ module.exports = function (grunt) {
         tasks: ['newer:jshint:test', 'karma']
       },
       styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
+        files: ['<%= yeoman.app %>/styles/{,*/}*.css', '<%= yeoman.app %>/styles/{,*/}*.less'],
+        tasks: ['newer:less:dev', 'newer:copy:styles', 'autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -365,15 +365,50 @@ module.exports = function (grunt) {
       }
     },
 
+    // Less
+    less: {
+      dev: {
+          options: {
+              paths: ["<%= yeoman.app %>/styles/less"],
+              modifyVars: {
+                  /*imgPath: '"http://mycdn.com/path/to/images"',
+                   bgColor: 'red'*/
+              }
+          },
+          files: {
+              "<%= yeoman.app %>/styles/style.css": "<%= yeoman.app %>/styles/less/style.less",
+              "<%= yeoman.app %>/styles/theme.css": "<%= yeoman.app %>/styles/less/theme.less",
+              "<%= yeoman.app %>/styles/ui.css": "<%= yeoman.app %>/styles/less/ui.less"
+          }
+      },
+      dist: {
+          options: {
+              paths: ["<%= yeoman.app %>/styles/less"],
+              modifyVars: {
+                  /*imgPath: '"http://mycdn.com/path/to/images"',
+                  bgColor: 'red'*/
+              }
+          },
+          files: {
+              "<%= yeoman.app %>/styles/style.css": "<%= yeoman.app %>/styles/less/style.less",
+              "<%= yeoman.app %>/styles/theme.css": "<%= yeoman.app %>/styles/less/theme.less",
+              "<%= yeoman.app %>/styles/ui.css": "<%= yeoman.app %>/styles/less/ui.less"
+          }
+      }
+    },
+
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
+        'less:dev',
         'copy:styles'
       ],
       test: [
+        'less:dev',
         'copy:styles'
       ],
       dist: [
+        'less:dist',
         'copy:styles',
         'imagemin',
         'svgmin'
@@ -427,6 +462,7 @@ module.exports = function (grunt) {
     'autoprefixer',
     'concat',
     'ngAnnotate',
+    'less:dist',
     'copy:dist',
     'cdnify',
     'cssmin',

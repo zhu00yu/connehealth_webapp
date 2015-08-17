@@ -1,0 +1,397 @@
+﻿<div>
+    <div panel-box-directive>
+        <div panel-box-header-directive header-title="职员管理"></div>
+        <div panel-box-content-directive>
+            <div style="padding-bottom: 30px;">
+                <table class="table dataTable" id="table2">
+                    <thead>
+                        <tr>
+                            <th class="hide">EmployeeId</th>
+                            <th class="hide">UserId</th>
+                            <th class="hide">PracticeId</th>
+                            <th class="hide">IsManager</th>
+                            <th class="hide">FamilyName</th>
+                            <th class="hide">GivenName</th>
+                            <th class="hide">BirthDate</th>
+                            <th class="hide">Sex</th>
+                            <th class="hide">Email</th>
+                            <th class="hide">Mobile</th>
+                            <th class="hide">Province</th>
+                            <th class="hide">City</th>
+                            <th class="hide">District</th>
+                            <th class="hide">Zip</th>
+                            <th class="hide">Address</th>
+                            <th class="hide">CertificateNo</th>
+                            <th class="hide">PracticeNo</th>
+                            <th class="hide">PracticeLocation</th>
+                            <th class="hide">PrimaryPracticeName</th>
+                            <th class="hide">ProfessionalRank</th>
+                            <th class="hide">Specialties</th>
+                            <th class="hide">Skills</th>
+                            <th class="hide">ApplyDate</th>
+                            <th class="hide">ApproveDate</th>
+                            <th class="hide">ApproveBy</th>
+                            <th class="hide">IsApproved</th>
+                            <th class="hide">IsPractice</th>
+                            <th class="hide">IsProvider</th>
+                            <th class="hide">IsPatient</th>
+                            <th class="hide">Status</th>
+                            <th>&nbsp;</th>
+                            <th>医师资格证书</th>
+                            <th>名称</th>
+                            <th>性别</th>
+                            <th>职称</th>
+                            <th>专科</th>
+                            <th>技能</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade insertModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                    <h4 class="modal-title"><strong>添加</strong> 员工</h4>
+                </div>
+                <div class="modal-body" style="max-height: 380px; overflow: auto;">
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>系统用户</label>
+                                    <div>
+                                        <input type="text" ng-model="dto.employee.UserId" class="userSearch form-control form-white">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>姓</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.employee.FamilyName" class="form-control form-white" placeholder="姓">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>名</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.employee.GivenName" class="form-control form-white" placeholder="名">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>出生日期</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.employee.BirthDate" class="form-control form-white" placeholder="出生日期">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>性别</label>
+                                    <div>
+                                        <select select2-directive ng-model="dto.employee.Gender" init-value="{{dto.employee.Gender}}" class="form-control form-white" data-placeholder="性别">
+                                            <option>男</option>
+                                            <option>女</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>邮箱</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.employee.Email" class="form-control form-white" placeholder="邮箱">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>电话</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.employee.Mobile" class="form-control form-white" placeholder="电话">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>我是机构管理员</label>
+                                    <div class="prepend-icon">
+                                        <input type="checkbox" ng-model="dto.employee.IsManager" data-checkbox="icheckbox_square-blue" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>我是医生</label>
+                                    <div class="prepend-icon">
+                                        <input type="checkbox" ng-model="dto.employee.IsProvider" data-checkbox="icheckbox_square-blue" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" ng-show="dto.employee.IsProvider">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>医师资格证编码</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.employee.CertificateNo" class="form-control form-white" placeholder="医师资格证编码">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>医师职称</label>
+                                    <div>
+                                        <select select2-directive ng-model="dto.employee.ProfessionalRank" init-value="{{dto.employee.ProfessionalRank}}" class="form-control form-white" multiple="multiple" data-maximum-selection-length="1" data-placeholder="职称">
+                                            <option>住院医师</option>
+                                            <option>主治医师</option>
+                                            <option>副主任医师</option>
+                                            <option>主任医师</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>医师专科</label>
+                                    <div specialist-directive specialties="dto.employee.Specialties"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="dto.employee.IsProvider">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>医师执业证编码</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.employee.PracticeNo" class="form-control form-white" placeholder="医师执业证编码">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>医师执业地区</label>
+                                    <div citylist-directive location="dto.employee.practicelocation"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>第一执业机构</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.employee.PrimaryPracticeName" class="form-control form-white" placeholder="第一执业机构">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="dto.employee.IsProvider">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>医师技能</label>
+                                    <div class="prepend-icon">
+                                        <textarea ng-model="dto.employee.Skills" class="form-control form-white" placeholder="医师技能"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6"></div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary btn-embossed" ng-click="submitEmployeeEditor(true, dto.employee)">添加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade editModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                    <h4 class="modal-title"><strong>修改</strong> 科室</h4>
+                </div>
+                <div class="modal-body" style="max-height: 380px; overflow: auto;">
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>姓</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.employee.FamilyName" class="form-control form-white" placeholder="姓">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>名</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.employee.GivenName" class="form-control form-white" placeholder="名">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>性别</label>
+                                    <div>
+                                        <select select2-directive ng-model="dto.employee.Gender" init-value="{{dto.employee.Gender}}" class="form-control form-white" data-placeholder="性别">
+                                            <option>男</option>
+                                            <option>女</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>出生日期</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.employee.BirthDate" class="form-control form-white" placeholder="出生日期">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>电话</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.employee.Mobile" class="form-control form-white" placeholder="电话">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>邮箱</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.employee.Email" class="form-control form-white" placeholder="邮箱">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>我是机构管理员</label>
+                                    <div class="prepend-icon">
+                                        <input type="checkbox" ng-model="dto.employee.IsManager" data-checkbox="icheckbox_square-blue" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>我是医生</label>
+                                    <div class="prepend-icon">
+                                        <input type="checkbox" ng-model="dto.employee.IsProvider" data-checkbox="icheckbox_square-blue" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                        </div>
+
+                        <div class="row" ng-show="dto.employee.IsProvider">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>医师资格证编码</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.employee.CertificateNo" class="form-control form-white" placeholder="医师资格证编码">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>医师职称</label>
+                                    <div>
+                                        <select select2-directive ng-model="dto.employee.ProfessionalRank" init-value="{{dto.employee.ProfessionalRank}}" class="form-control form-white" multiple="multiple" data-maximum-selection-length="1" data-placeholder="职称">
+                                            <option>住院医师</option>
+                                            <option>主治医师</option>
+                                            <option>副主任医师</option>
+                                            <option>主任医师</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>医师专科</label>
+                                    <div specialist-directive specialties="dto.employee.Specialties"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="dto.employee.IsProvider">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>医师执业证编码</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.employee.PracticeNo" class="form-control form-white" placeholder="医师执业证编码">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>医师执业地区</label>
+                                    <div citylist-directive location="dto.employee.practicelocation"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>第一执业机构</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.employee.PrimaryPracticeName" class="form-control form-white" placeholder="第一执业机构">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" ng-show="dto.employee.IsProvider">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>医师技能</label>
+                                    <div class="prepend-icon">
+                                        <textarea ng-model="dto.employee.Skills" class="form-control form-white" placeholder="医师技能"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6"></div>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary btn-embossed" ng-click="submitEmployeeEditor(false, dto.employee)">修改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

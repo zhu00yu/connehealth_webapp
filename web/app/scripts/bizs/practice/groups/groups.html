@@ -1,0 +1,112 @@
+﻿<div>
+    <div panel-box-directive>
+        <div panel-box-header-directive header-title="科室管理"></div>
+        <div panel-box-content-directive>
+            <div style="padding-bottom: 30px;">
+                <table class="table dataTable" id="table2">
+                    <thead>
+                        <tr>
+                            <th class="hide">Id</th>
+                            <th class="hide">PracticeId</th>
+                            <th>&nbsp;</th>
+                            <th>科室名称</th>
+                            <th>功能权限</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade insertModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                    <h4 class="modal-title"><strong>添加</strong> 科室</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>科室名称</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="groupDto.group.Name" class="form-control form-white" placeholder="科室名称">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>功能权限</label>
+                                    <div class="prepend-icon">
+                                        <textarea ng-model="groupDto.group.Functions" class="form-control form-white" placeholder="功能权限"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div id="functionTree" treeview-directive></div>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary btn-embossed" ng-click="submitGroupEditor(true, groupDto.group)">添加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade editModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                    <h4 class="modal-title"><strong>修改</strong> 科室</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>科室名称</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="groupDto.group.Name" class="form-control form-white" placeholder="科室名称">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>功能权限</label>
+                                    <div class="prepend-icon">
+                                        <textarea ng-model="groupDto.group.Functions" class="form-control form-white" placeholder="功能权限"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div id="functionTree" treeview-directive></div>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary btn-embossed" ng-click="submitGroupEditor(false, groupDto.group)">修改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

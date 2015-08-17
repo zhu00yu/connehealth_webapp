@@ -1,0 +1,368 @@
+﻿<div ng-class="isForPatient ? '' : 'hide'">
+    <form class="form-signup" action="dashboard.html" role="form">
+        <h3><strong>创建</strong> 您的新账户
+        </h3>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="append-icon">
+                    <input type="text" name="userDto.UserProfile.FamilyName" ng-model="userDto.UserProfile.FamilyName" class="form-control form-white firstname" placeholder="姓" required autofocus>
+                    <i class="icon-user"></i>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="append-icon">
+                    <input type="text" name="userDto.UserProfile.GivenName" ng-model="userDto.UserProfile.GivenName" class="form-control form-white lastname" placeholder="名" required>
+                    <i class="icon-user"></i>
+                </div>
+            </div>
+        </div>
+        <div class="append-icon">
+            <input type="email" name="userDto.UserProfile.Email" ng-model="userDto.UserProfile.Email" class="form-control form-white email" placeholder="Email" required>
+            <i class="icon-envelope"></i>
+        </div>
+        <div class="append-icon">
+            <input type="text" name="userDto.User.UserName" ng-model="userDto.User.UserName" class="form-control form-white username" placeholder="账户名" required>
+            <i class="icon-lock"></i>
+        </div>
+        <div class="append-icon m-b-10">
+            <input type="password" name="userDto.User.Password" ng-model="userDto.User.Password" class="form-control form-white password" placeholder="密码" required>
+            <i class="icon-lock"></i>
+        </div>
+        <div class="append-icon m-b-10">
+            <input type="password" name="userDto.User.Password2" ng-model="userDto.User.Password2" class="form-control form-white password2" placeholder="密码确认" required>
+            <i class="icon-lock"></i>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="terms option-group">
+                    <label for="terms" class="m-t-10">
+                        <input type="checkbox" name="userDto.IsAgreeTerm" ng-model="userDto.IsAgreeTerm" data-checkbox="icheckbox_square-blue" required />
+                        我同意条款
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="m-t-10">
+                    <button type="button" ng-click="registerUser(userDto)" class="btn btn-lg btn-dark btn-rounded" data-style="expand-left">注册</button>
+                </div>
+            </div>
+        </div>
+        
+    </form>
+    <div class="form-footer">
+        <div class="social-btn">
+            <button type="button" class="btn btn-lg btn-block btn-blue btn-square" ui-sref="authorize.register({type: 'provider'})"><i class="fa fa-user-md pull-left"></i>注册成医生</button>
+        </div>
+        <div class="clearfix">
+            <p class="new-here">
+                <a ui-sref="authorize.login">用已有账户登录</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<div ng-class="isForProvider ? '' : 'hide'">
+    <form class="form-signup" action="dashboard.html" role="form">
+        <tabset class="tab-fade-in">
+            <!--TODO: add nav-primary to ul-->
+            <tab active>
+                <tab-heading>
+                    账户信息
+                </tab-heading>
+                <div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="append-icon">
+                                <input type="text" name="userDto.UserProfile.FamilyName" ng-model="userDto.UserProfile.FamilyName" class="form-control form-white firstname" placeholder="姓" required autofocus>
+                                <i class="icon-user"></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="append-icon">
+                                <input type="text" name="userDto.UserProfile.GivenName" ng-model="userDto.UserProfile.GivenName" class="form-control form-white lastname" placeholder="名" required>
+                                <i class="icon-user"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="append-icon">
+                        <input type="email" name="userDto.UserProfile.Email" ng-model="userDto.UserProfile.Email" class="form-control form-white email" placeholder="Email" required>
+                        <i class="icon-envelope"></i>
+                    </div>
+                    <div class="append-icon">
+                        <input type="text" name="userDto.User.UserName" ng-model="userDto.User.UserName" class="form-control form-white username" placeholder="账户名" required>
+                        <i class="icon-lock"></i>
+                    </div>
+                    <div class="append-icon m-b-10">
+                        <input type="password" name="userDto.User.Password" ng-model="userDto.User.Password" class="form-control form-white password" placeholder="密码" required>
+                        <i class="icon-lock"></i>
+                    </div>
+                    <div class="append-icon">
+                        <input type="password" name="userDto.User.Password2" ng-model="userDto.User.Password2" class="form-control form-white password2" placeholder="密码确认" required>
+                        <i class="icon-lock"></i>
+                    </div>
+                </div>
+            </tab>
+            <tab>
+                <tab-heading>
+                    个人信息
+                </tab-heading>
+                <div>
+                    <div class="append-icon">
+                        <input type="text" name="userDto.UserProfile.Mobile" ng-model="userDto.UserProfile.Mobile" class="form-control form-white phone" placeholder="手机号码" required>
+                        <i class="icon-envelope"></i>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="append-icon">
+                                <input type="text" name="captcha" id="captcha" class="form-control form-white" placeholder="手机验证码" required autofocus>
+                                <i class="icon-user"></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="append-icon">
+                                <button type="button" class="btn btn-sm btn-primary">免费获取验证码</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="append-icon">
+                                <select select2-directive name="userDto.UserProfile.Sex" ng-model="userDto.UserProfile.Sex" class="form-control form-white" data-placeholder="性别">
+                                    <option value="1" selected="selected">男</option>
+                                    <option value="0">女</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="append-icon">
+                                <input type="text" name="userDto.UserProfile.BirthDate" ng-model="userDto.UserProfile.BirthDate" class="form-control form-white" placeholder="出生日期" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="append-icon">
+                        <input type="text" name="userDto.UserProfile.IdCardNo" ng-model="userDto.UserProfile.IdCardNo" class="form-control form-white" placeholder="身份证号码" required>
+                    </div>
+
+                </div>
+            </tab>
+            <tab>
+                <tab-heading>
+                    执业信息
+                </tab-heading>
+                <div>
+                    <div class="append-icon">
+                        <input type="text" name="userDto.ProviderBusinessInfo.CertificateNo" ng-model="userDto.ProviderBusinessInfo.CertificateNo" class="form-control form-white" placeholder="医生资格证书编码" required>
+                    </div>
+                    <div class="append-icon">
+                        <input type="text" name="userDto.ProviderBusinessInfo.PracticeNo" ng-model="userDto.ProviderBusinessInfo.PracticeNo" class="form-control form-white" placeholder="医生执业证书编码" required>
+                    </div>
+                    <div class="append-icon">
+                        <div citylist-directive location="userDto.ProviderBusinessInfo.PracticeLocation" placeholder="执业地区"></div>
+                    </div>
+                    <div class="append-icon">
+                        <input type="text" name="userDto.ProviderBusinessInfo.PrimaryPracticeName" ng-model="userDto.ProviderBusinessInfo.PrimaryPracticeName" class="form-control form-white" placeholder="第一执业机构" required>
+                    </div>
+                    <div class="append-icon">
+                        <select select2-directive name="userDto.ProviderBusinessInfo.ProfessionalRank" ng-model="userDto.ProviderBusinessInfo.ProfessionalRank" class="form-control form-white" data-placeholder="职称">
+                            <option></option>
+                            <option selected="selected">住院医师</option>
+                            <option>主治医师</option>
+                            <option>副主任医师</option>
+                            <option>主任医师</option>
+                        </select>
+                    </div>
+                    <div class="append-icon">
+                        <div specialist-directive specialties="userDto.ProviderBusinessInfo.Specialties" placeholder="医师专科"></div>
+                    </div>
+                    <div class="append-icon">
+                        <textarea name="userDto.ProviderBusinessInfo.Skills" ng-model="userDto.ProviderBusinessInfo.Skills" class="form-control form-white" placeholder="专业技能" required></textarea>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="terms option-group">
+                    <label for="terms" class="m-t-10">
+                        <input type="checkbox" name="userDto.IsAgreeTerm" ng-model="userDto.IsAgreeTerm" data-checkbox="icheckbox_square-blue" required/>
+                        我同意条款
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="m-t-10">
+                    <button type="button" ng-click="registerUser(userDto)" class="btn btn-lg btn-dark btn-rounded" style="margin: 0" data-style="expand-left">注册</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="form-footer">
+        <div class="social-btn">
+            <button type="button" class="btn btn-lg btn-block btn-blue btn-square" ui-sref="authorize.register({type: 'practice'})"><i class="fa fa-user-md pull-left"></i>注册医疗机构</button>
+        </div>
+        <div class="clearfix">
+            <p class="new-here">
+                <a ui-sref="authorize.login">用已有账户登录</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<div ng-class="isForPractice ? '' : 'hide'">
+    <form class="form-signup" action="dashboard.html" role="form">
+        <tabset class="tab-fade-in">
+            <!--TODO: add nav-primary to ul-->
+            <tab active>
+                <tab-heading>
+                    账户信息
+                </tab-heading>
+                <div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="append-icon">
+                                <input type="text" name="userDto.UserProfile.FamilyName" ng-model="userDto.UserProfile.FamilyName" class="form-control form-white firstname" placeholder="姓" required autofocus>
+                                <i class="icon-user"></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="append-icon">
+                                <input type="text" name="userDto.UserProfile.GivenName" ng-model="userDto.UserProfile.GivenName" class="form-control form-white lastname" placeholder="名" required>
+                                <i class="icon-user"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="append-icon">
+                        <input type="email" name="userDto.UserProfile.Email" ng-model="userDto.UserProfile.Email" class="form-control form-white email" placeholder="Email" required>
+                        <i class="icon-envelope"></i>
+                    </div>
+                    <div class="append-icon">
+                        <input type="text" name="userDto.User.UserName" ng-model="userDto.User.UserName" class="form-control form-white username" placeholder="账户名" required>
+                        <i class="icon-lock"></i>
+                    </div>
+                    <div class="append-icon m-b-10">
+                        <input type="password" name="userDto.User.Password" ng-model="userDto.User.Password" class="form-control form-white password" placeholder="密码" required>
+                        <i class="icon-lock"></i>
+                    </div>
+                    <div class="append-icon">
+                        <input type="password" name="userDto.User.Password2" ng-model="userDto.User.Password2" class="form-control form-white password2" placeholder="密码确认" required>
+                        <i class="icon-lock"></i>
+                    </div>
+                </div>
+            </tab>
+            <tab>
+                <tab-heading>
+                    个人信息
+                </tab-heading>
+                <div>
+                    <div class="append-icon">
+                        <input type="text" name="userDto.UserProfile.Mobile" ng-model="userDto.UserProfile.Mobile" class="form-control form-white phone" placeholder="手机号码" required>
+                        <i class="icon-envelope"></i>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="append-icon">
+                                <input type="text" name="captcha" id="captcha" class="form-control form-white" placeholder="手机验证码" required autofocus>
+                                <i class="icon-user"></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="append-icon">
+                                <button type="button" class="btn btn-sm btn-primary">免费获取验证码</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="append-icon">
+                                <select select2-directive name="userDto.UserProfile.Sex" ng-model="userDto.UserProfile.Sex" class="form-control form-white" data-placeholder="性别">
+                                    <option value="1" selected="selected">男</option>
+                                    <option value="0">女</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="append-icon">
+                                <input type="text" name="userDto.UserProfile.BirthDate" ng-model="userDto.UserProfile.BirthDate" class="form-control form-white" placeholder="出生日期" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="append-icon">
+                        <input type="text" name="userDto.UserProfile.IdCardNo" ng-model="userDto.UserProfile.IdCardNo" class="form-control form-white" placeholder="身份证号码" required>
+                    </div>
+                    
+                </div>
+            </tab>
+            <tab>
+                <tab-heading>
+                    机构信息
+                </tab-heading>
+                <div>
+                    <div class="append-icon">
+                        <select select2-directive name="userDto.PracticeInfo.Type" ng-model="userDto.PracticeInfo.Type" class="form-control form-white" placeholder="机构类型">
+                            <option></option>
+                            <option selected="selected">诊所</option>
+                            <option>医院</option>
+                            <option>检验机构</option>
+                        </select>
+                    </div>
+                    <div class="append-icon">
+                        <input type="text" name="userDto.PracticeInfo.Name" ng-model="userDto.PracticeInfo.Name" class="form-control form-white" placeholder="机构名称" required>
+                    </div>
+                    <div class="append-icon">
+                        <input type="text" name="userDto.PracticeInfo.PracticeLicenseCode" ng-model="userDto.PracticeInfo.PracticeLicenseCode" class="form-control form-white" placeholder="机构登记号" required>
+                    </div>
+                    <div class="append-icon">
+                        <input type="text" name="userDto.PracticeInfo.Address" ng-model="userDto.PracticeInfo.Address" class="form-control form-white" placeholder="详细地址" required>
+                    </div>
+                    <div>
+                        <div location-directive province-id="userDto.PracticeInfo.ProvinceId" city-id="userDto.PracticeInfo.CityId" region-id="userDto.PracticeInfo.RegionId"></div>
+                    </div>
+                    <div class="append-icon">
+                        <input type="text" name="userDto.PracticeInfo.BusinessPhone" ng-model="userDto.PracticeInfo.BusinessPhone" class="form-control form-white" placeholder="机构电话" required>
+                    </div>
+                    <div class="append-icon">
+                        <div class="icheck-inline">
+                            <label><input type="radio" name="userDto.PracticeInfo.IsPublicOrg" ng-model="userDto.PracticeInfo.IsPublicOrg" data-radio="iradio_square-blue"> 公立</label>
+                            <label><input type="radio" name="userDto.PracticeInfo.IsPublicOrg" ng-model="userDto.PracticeInfo.IsPublicOrg" data-radio="iradio_square-blue"> 私立</label>
+                        </div>
+                    </div>
+                    
+
+
+                </div>
+            </tab>
+        </tabset>
+                
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="terms option-group">
+                    <label for="terms" class="m-t-10">
+                        <input type="checkbox" name="userDto.IsAgreeTerm" ng-model="userDto.IsAgreeTerm" data-checkbox="icheckbox_square-blue" required />
+                        我同意条款
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="m-t-10">
+                    <button type="button" ng-click="registerUser(userDto)" class="btn btn-lg btn-dark btn-rounded" style="margin: 0" data-style="expand-left">注册</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="form-footer">
+        <div class="social-btn">
+            <button type="button" class="btn btn-lg btn-block btn-blue btn-square" ui-sref="authorize.register({type: 'provider'})"><i class="fa fa-user-md pull-left"></i>注册成为医生</button>
+        </div>
+        <div class="clearfix">
+            <p class="new-here">
+                <a ui-sref="authorize.login">用已有账户登录</a>
+            </p>
+        </div>
+    </div>
+</div>
+
