@@ -16,13 +16,13 @@
                 Navigation
             </div>
             <ul class="nav nav-sidebar">
-                <li class="active">
+                <li  ng-class="{active  : isActive('biz.dashboard')}">
                     <a ui-sref="biz.dashboard"><i class="icon-home"></i><span>首页</span></a>
                 </li>
-                <li class="nav-parent" ng-repeat="item in sideBarItems">
+                <li class="nav-parent"  ng-class="{active  : isActive(item.state)}" ng-repeat="item in sideBarItems">
                     <a href="#"><i class="{{item.icon}}"></i><span>{{item.text}}</span> <span class="fa arrow"></span></a>
                     <ul class="children collapse">
-                        <li ng-repeat="subItem in item.subItems"><a ui-sref="{{subItem.state}}">{{subItem.text}}</a></li>
+                        <li  ng-class="{active  : isActive(subItem.state)}" ng-repeat="subItem in item.subItems"><a ui-sref="{{subItem.state}}">{{subItem.text}}</a></li>
                     </ul>
                 </li>
             </ul>

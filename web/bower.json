@@ -5,15 +5,19 @@
     "jquery": "~2.1.4",
     "jquery-ui": "~1.11.4",
     "underscore": "~1.8.3",
+    "moment": "~2.10.6",
     "bootstrap": "^3.2.0",
     "jasny-bootstrap": "~3.1.3",
     "blockui": "*",
     "bootbox": "~4.4.0",
+    "bootstrap-hover-dropdown": "~2.1.3",
+    "jquery-cookie": "~1.4.1",
+    "datatables": "~1.10.8",
+    "datatables-tabletools": "~2.2.4",
     "angular": "^1.3.0",
     "angular-cookies": "^1.3.0",
     "angular-ui-router": "~0.2.15",
-    "angular-bootstrap": "~0.13.3",
-    "bootstrap-hover-dropdown": "~2.1.3"
+    "angular-bootstrap": "~0.13.3"
   },
   "devDependencies": {
     "angular-mocks": "^1.3.0"
@@ -31,6 +35,13 @@
         "dist/js/jasny-bootstrap.js",
         "dist/css/jasny-bootstrap.css",
         "less/jasny-bootstrap.less"
+      ]
+    },
+    "datatables": {
+      "main": [
+        "media/js/jquery.dataTables.js",
+        "media/js/dataTables.bootstrap.js",
+        "media/css/dataTables.bootstrap.css"
       ]
     }
   },

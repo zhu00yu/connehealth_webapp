@@ -12,7 +12,11 @@
         function getEmployees() {
             var user = $rootScope.currentUser || {};
             employeesService.getEmployees(user.practiceId).then(function (result) {
-                $scope.dto.employees = result.data;
+                var employees = result.data;
+                _.each(employees, function(e){
+                    e.provider.userProfile.dob = moment(+e.provider.userProfile.dob).format("YYYY-MM-DD");
+                });
+                $scope.dto.employees = employees;
             }, function (result) {
                 console.log(arguments);
             });
@@ -24,11 +28,11 @@
                 oElements = employeesService.initWidgets(user.practiceId, element,
                     oElements.DomTable, oElements.DomInsertModal, oElements.DomEditModal,
                     function (employee) {
-                        if (employee.PracticeLocation && typeof employee.PracticeLocation == "string") {
-                            employee.PracticeLocation = employee.PracticeLocation.split("|");
+                        if (employee.provider.practiceLocation && typeof employee.provider.practiceLocation == "string") {
+                            employee.provider.practiceLocation = employee.provider.practiceLocation.split("|");
                         }
-                        if (employee.Specialties && typeof employee.Specialties == "string") {
-                            employee.Specialties = employee.Specialties.split("|");
+                        if (employee.provider.specialties && typeof employee.provider.specialties == "string") {
+                            employee.provider.specialties = employee.provider.specialties.split("|");
                         }
                         $scope.dto.employee = employee;
                         if (!$scope.$$phase) {

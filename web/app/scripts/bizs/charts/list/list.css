@@ -1,0 +1,96 @@
+﻿/*patient list页面的样式*/
+
+/*头部*/
+.ch-charts-list-header{
+    padding:10px;
+    background-color: #4a89dc;
+}
+.ch-charts-list-header h2{
+    margin: 0;
+    color: #fff;
+}
+
+/*toolbar*/
+.ch-charts-list-toolbar{
+    padding: 10px 0;
+}
+.ch-charts-list-table{
+    width: 100%;
+}
+.ch-charts-list-table td{
+    padding: 0 10px;
+}
+.ch-charts-list-td-provider{
+    width:100px;
+}
+.ch-charts-list-select-provider{
+    width: 100px;
+}
+.ch-charts-list-td-scheduled{
+    width: 290px;
+}
+.ch-charts-list-td-search-patient{
+    width: 300px;
+}
+.ch-charts-list-td-show-inactive{
+    padding-top: 10px!important;
+    width: 150px;
+}
+.ch-charts-list-td-add-patient{
+    text-align: right;
+}
+.ch-charts-list .ch-input-search{
+    width: 190px!important;
+}
+/*绿色：rgb(21, 144, 119);*/
+/*灰色：rgb(241, 241, 241);*/
+/*蓝色：#4a89dc*/
+/*深灰色：rgb(91, 91, 91) 文字颜色*/
+.ch-charts-list-btn-inactive,
+.ch-charts-list-btn-active
+{
+    width: 130px;
+    border: 1px solid #4a89dc;
+}
+.ch-charts-list-btn-inactive{
+    background-color: #fff;/* rgb(241, 241, 241);*/
+}
+.ch-charts-list-btn-inactive:hover{
+    background-color: #4a89dc;
+}
+.ch-charts-list-btn-inactive:focus{
+    color: rgb(91, 91, 91);
+}
+.ch-charts-list-btn-active{
+    background-color: #4a89dc;
+    color: #fff;
+}
+.ch-charts-list-btn-active:hover{
+    cursor: default;
+}
+
+/*表格*/
+/*深蓝：rgb(4, 94, 165)*/
+.ch-charts-list-body thead{
+    background-color: rgb(4, 94, 165);
+    color: #fff;
+}
+.ch-charts-list-body{
+    min-height:350px;
+}
+.ch-patient-face{
+    width: 50px;
+    height: 50px;
+}
+.ch-charts-list-table tbody td{
+    vertical-align: top!important;
+}
+/*表格单元格宽度*/
+.ch-charts-list-td-image{
+    width: 50px;
+}
+.ch-charts-list .glyphicon-earphone{
+    color: blue; 
+    font-size: 11px; 
+    font-weight: bold;
+}

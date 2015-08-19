@@ -16,6 +16,7 @@ angular.module('chApp.common.directives').directive('citylistDirective', ['$comp
             locationsService.loadLocations();
 
             var wa = $scope.$watch('location', function (newValue, oldValue) {
+                wa();
                 if (newValue && typeof newValue === "string") {
                     $scope.location = newValue.split('|');
                 }
@@ -24,7 +25,6 @@ angular.module('chApp.common.directives').directive('citylistDirective', ['$comp
                         return [r.region_id, r.fullname, r.zip_number, r.code];
                     });
                     $scope.cities = datas;
-                    wa();
                 });
             });
 

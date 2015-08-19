@@ -28,7 +28,50 @@
                 }
             ]
         });
+        $scope.sideBarItems.push({
+            state: "biz.charts",
+            text: "病历管理",
+            icon: "icon-bulb",
+            subItems: [
+                {
+                    state: "biz.charts.list",
+                    text: "病历列表"
+                }
+            ]
+        });
+        $scope.sideBarItems.push({
+            state: "biz.patients",
+            text: "患者管理",
+            icon: "icon-bulb",
+            subItems: [
+                {
+                    state: "biz.patients.list",
+                    text: "患者列表"
+                },
+                {
+                    state: "biz.patients.addpatient",
+                    text: "添加患者"
+                }
+            ]
+        });
 
+        var allItems = [];
+        _.each($scope.sideBarItems, function(item){
+            if (!item.subItems){
+                allItems.push({state:item.state, parent:null});
+            }else{
+                _.each(item.subItems, function(sub){
+                    allItems.push({state:sub.state, parent:item.state});
+                });
+            }
+        });
+
+
+        $scope.isActive = function (viewLocation) {
+            var item = _.find(allItems, function(item){ return item.state ==  $state.current.name });
+
+            return viewLocation === $state.current.name || viewLocation == item.parent;
+        };
         applicationService.init();
     }
 ]);

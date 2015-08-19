@@ -1,6 +1,6 @@
 ﻿angular.module('chApp.common.controllers').controller('MainController',
-    ['$state', '$scope', '$timeout', '$cookieStore', 'appConfig', 'applicationService',
-        function ($state, $scope, $timeout, $cookieStore, appConfig, applicationService) {
+    ['$state', '$scope', '$timeout', 'appConfig', 'applicationService',
+        function ($state, $scope, $timeout, appConfig, applicationService) {
     applicationService.init();
 
     $timeout(function () {

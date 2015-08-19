@@ -43,6 +43,27 @@
                 }
             }
         );
+        $.fn.dataTable.TableTools.buttons.goto_state = $.extend(
+            true,
+            {},
+            $.fn.dataTable.TableTools.buttonBase,
+            {
+                "sButtonText": "Goto",
+                "bFullButton": false,
+                "bSingleButton": true,
+                "fnInit": function (button, conf) {
+                    var bDisable = !conf.bFullButton;
+
+                    $(button).toggleClass("disabled", bDisable);
+                },
+                "fnSelect": function (button, conf, row ) {
+                    var bDisable = !conf.bSingleButton;
+                    $(button).toggleClass("disabled", bDisable);
+                },
+                "fnClick": function (button, conf) {
+                }
+            }
+        );
     }
 
     if ($.fn.dataTable && $.fn.dataTable.TableTools) {

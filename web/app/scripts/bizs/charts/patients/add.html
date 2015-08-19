@@ -1,0 +1,286 @@
+﻿<div class="ch-charts-patients-add">
+    <div class="ch-header">
+        <h2>添加患者</h2>
+    </div>
+    <div class="ch-toolbar-top">
+        <button class="btn btn-white" ng-click="vm.closePage()">关闭</button>
+        <button class="btn btn-warning" ng-click="vm.addPatient()">保存</button>
+    </div>
+    <div class="ch-body">
+        <form role="form" class="form-inline">
+            <table class="ch-table-container">
+                <tr>
+                    <td class="ch-left">
+                        <h3>个人基本信息</h3>
+                        <div class="ch-section">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>姓名<span class="ch-red">*</span></label>
+                                        <input type="text" class="form-control form-white input-sm" ng-model="vm.patient.PatientName" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>身份证号码</label>
+                                        <input type="text" class="form-control form-white input-sm" ng-model="vm.patient.IDNumber">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>移动电话</label>
+                                        <input type="text" class="form-control form-white input-sm" ng-model="vm.patient.MobilePhone">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>E-mail</label>
+                                        <input type="text" class="form-control form-white input-sm">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <label style="margin-top: 5px;">性别<span class="ch-red">*</span></label></td>
+                                                <td>
+                                                    <select style="width: 240px; margin-top: -9px; margin-left: -7px;" class="form-control form-white input-sm select2" data-style="white" ng-model="vm.patient.Sex" ng-options="sex.CategoryName as sex.DisplayName for sex in vm.categories | filter: {BigCategory: '性别'}"></select></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <label style="margin-top: 5px;">婚姻状况</label></td>
+                                                <td>
+                                                    <select style="width: 240px; margin-top: -9px; margin-left: -8px;" class="form-control form-white input-sm select2" data-style="white" ng-model="vm.patient.MaritalStatus" ng-options="category.CategoryName as category.DisplayName for category in vm.categories | filter: {BigCategory: '婚姻状况'}"></select></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>生日<span class="ch-red">*</span></label>
+                                        <!--<input type="date" class="form-control form-white input-sm" ng-model="vm.patient.DateOfBirthTime">-->
+                                        <input type="text" class="b-datepicker form-control input-sm form-white" data-format="yyyy-mm-dd" data-view="2" data-autoclose="true" data-lang="cn" data-parse="true" ng-model="vm.patient.DateOfBirthTime" ng-change="vm.changeAge()">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <label style="margin-top: 5px;">国籍</label></td>
+                                                <td>
+                                                    <select style="width: 240px; margin-top: -9px; margin-left: -8px;" class="form-control form-white input-sm select2" data-style="white" ng-model="vm.patient.Nationality" ng-options="category.CategoryName as category.DisplayName for category in vm.categories | filter: {BigCategory: '国籍'}"></select></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>年龄</label>
+                                        <input type="text" class="form-control input-sm" ng-model="vm.patient.Age" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>医疗保险卡号</label>
+                                        <input type="text" class="form-control form-white input-sm" ng-model="vm.patient.SSN">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <label style="margin-top: 5px;">人种</label></td>
+                                                <td>
+                                                    <select style="width: 240px; margin-top: -9px; margin-left: -7px;" class="form-control form-white input-sm select2" data-style="white" ng-model="vm.patient.Race" ng-options="category.CategoryName as category.DisplayName for category in vm.categories | filter: {BigCategory: '人种'}"></select></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <label style="margin-top: 5px;">民族</label></td>
+                                                <td>
+                                                    <select style="width: 240px; margin-top: -9px; margin-left: -8px;" class="form-control form-white input-sm select2" data-style="white" ng-model="vm.patient.Ethnicity" ng-options="category.CategoryName as category.DisplayName for category in vm.categories | filter: {BigCategory: '民族'}"></select></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <label style="margin-top: 5px;">首选语言</label></td>
+                                                <td>
+                                                    <select style="width: 240px; margin-top: -9px; margin-left: -7px;" class="form-control form-white input-sm select2" data-style="white" ng-model="vm.patient.PreferredLanguage" ng-options="category.CategoryName as category.DisplayName for category in vm.categories | filter: {BigCategory: '首选语言'}"></select></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <label style="margin-top: 5px;">血型</label></td>
+                                                <td>
+                                                    <select style="width: 240px; margin-top: -9px; margin-left: -8px;" class="form-control form-white input-sm select2" data-style="white" ng-model="vm.patient.BloodType" ng-options="category.CategoryName as category.DisplayName for category in vm.categories | filter: {BigCategory: '血型'}"></select></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>籍贯</label>
+                                        <input type="text" class="form-control input-sm form-white" ng-model="vm.patient.NativePlace">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>联系方式</h3>
+                        <div class="ch-section">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>家庭地址</label>
+                                        <input type="text" class="form-control form-white input-sm" ng-model="vm.patient.HomeAddress">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>邮编</label>
+                                        <input type="text" class="form-control form-white input-sm" ng-model="vm.patient.HomeZip">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>居住地址</label>
+                                        <input type="text" class="form-control form-white input-sm" ng-model="vm.patient.RegisteredAddress">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>邮编</label>
+                                        <input type="text" class="form-control form-white input-sm" ng-model="vm.patient.RegisteredZip">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>工作单位</label>
+                                        <input type="text" class="form-control form-white input-sm" ng-model="vm.patient.Company">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <label style="margin-top: 5px;">行业</label></td>
+                                                <td>
+                                                    <select style="width: 240px; margin-top: -9px; margin-left: -8px;" class="form-control form-white input-sm select2" data-style="white" ng-model="vm.patient.Industry" ng-options="category.CategoryName as category.DisplayName for category in vm.categories | filter: {BigCategory: '行业'}"></select></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>单位地址</label>
+                                        <input type="text" class="form-control form-white input-sm" ng-model="vm.patient.WorkAddress">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>邮编</label>
+                                        <input type="text" class="form-control form-white input-sm" ng-model="vm.patient.WorkZip">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>单位电话</label>
+                                        <input type="text" class="form-control form-white input-sm" ng-model="vm.patient.WorkPhone">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+                        </div>
+                        <h3>联系人</h3>
+                        <div class="ch-section">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>联系人姓名</label>
+                                        <input type="text" class="form-control form-white input-sm" ng-model="vm.patient.ContactPerson">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <label style="margin-top: 5px;">关系</label></td>
+                                                <td>
+                                                    <select style="width: 240px; margin-top: -9px; margin-left: -8px;" class="form-control form-white input-sm select2" data-style="white" ng-model="vm.patient.ContactRelationship" ng-options="category.CategoryName as category.DisplayName for category in vm.categories | filter: {BigCategory: '关系'}"></select></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>联系人电话</label>
+                                        <input type="text" class="form-control form-white input-sm" ng-model="vm.patient.ContactPhone">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                <td class="ch-right">
+                    <div image-file-input-directive label="上传头像" fileurl="vm.PatientPhotoFileUrl" fileid="vm.PatientPhotoFileId" filedata="vm.PatientPhotoFileData" fileread="vm.PatientPhotoFileRead"></div>
+                </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div class="ch-toolbar-bottom">
+        <button class="btn btn-white" ng-click="vm.closePage()">关闭</button>
+        <button class="btn btn-warning" ng-click="vm.addPatient()">保存</button>
+    </div>
+</div>

@@ -6236,24 +6236,32 @@ table > tbody > tr.selected:hover > td {
   background-color: #ffffff;
   border: 1px solid #ffffff;
 }
-table.dataTable thead .sorting:before {
-  color: #DDDDDD;
-  content: "\f0dc";
-  float: right;
-  font-family: fontAwesome;
-  padding-left: 10px;
-}
-table.dataTable thead .sorting_desc:before {
-  color: #383838;
-  content: "\f0dd";
-  float: right;
-  font-family: fontAwesome;
-}
-table.dataTable thead .sorting_asc:before {
-  color: #383838;
-  content: "\f0de";
-  float: right;
-  font-family: fontAwesome;
+table.dataTable thead {
+  /*.sorting {
+      &:before {
+        color:#DDDDDD;
+        content: "\f0dc";
+        float: right;
+        font-family: fontAwesome;
+        padding-left: 10px;
+      }
+    }
+    .sorting_desc {
+      &:before {
+        color:#383838;
+        content: "\f0dd";
+        float: right;
+        font-family: fontAwesome;
+      }
+    }
+    .sorting_asc {
+      &:before {
+        color:#383838;
+        content: "\f0de";
+        float: right;
+        font-family: fontAwesome;
+      }
+    }*/
 }
 .table-red .pagination > .active > a,
 .table-red .pagination > .active > span,

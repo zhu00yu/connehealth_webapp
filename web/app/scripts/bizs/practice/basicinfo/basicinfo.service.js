@@ -24,7 +24,7 @@ angular.module('chApp.practice.services').factory('basicInfoService',
             return promise;
         };
         service.getPracticeOfCurrentUser = function() {
-            var token = $cookies[appConfig.CH_AU_T_NAME];
+            var token = $cookies.get(appConfig.CH_AU_T_NAME);
             var promise = null;
             if (!token) {
                 var deferred = $q.defer();
@@ -66,7 +66,7 @@ angular.module('chApp.practice.services').factory('basicInfoService',
             } else {
                 var data = {
                     id: fileId,
-                    fileNaame: fileName,
+                    fileName: fileName,
                     fileData: fileData
                 };
                 promise = $http.post(appConfig.API_HOST + "/practice-files/", data);

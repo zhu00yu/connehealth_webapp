@@ -17,6 +17,10 @@ angular.module('chApp.practice.directives', []);
 angular.module('chApp.practice.services', []);
 angular.module('chApp.practice.controllers', []);
 
+angular.module('chApp.patients.directives', []);
+angular.module('chApp.patients.services', []);
+angular.module('chApp.patients.controllers', []);
+
 angular.module('chApp.authorize.services', []);
 angular.module('chApp.authorize.controllers', []);
 
@@ -28,6 +32,7 @@ angular
         'chApp.common.controllers', 'chApp.common.directives', 'chApp.common.services',
         'chApp.charts.controllers', 'chApp.charts.services',
         'chApp.practice.controllers', 'chApp.practice.services', 'chApp.practice.directives',
+        'chApp.patients.controllers', 'chApp.patients.services', 'chApp.patients.directives',
         'chApp.authorize.controllers', 'chApp.authorize.services'
   ])
   .config(function ( $urlRouterProvider, $stateProvider, $httpProvider) {
@@ -35,8 +40,12 @@ angular
         //$httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = 'http://localhost:9000';
         $urlRouterProvider.when("", "/biz/dashboard");
         $stateProvider.state("authorize", {
-                url: "/authorize",
-                templateUrl: "/scripts/authorize/authorize.html"
+            url: "/authorize",
+            views: {
+                'main': {
+                    templateUrl: "/scripts/authorize/authorize.html"
+                }
+            }
         })
         .state("authorize.login", {
             // 登录页面
@@ -45,27 +54,51 @@ angular
             controller: "LoginController"
         })
         .state("biz", {
-            // 登录页面
             url: "/biz",
-            templateUrl: "/scripts/bizs/main.html",
-            controller: "BizMainController"
+            views: {
+                'main': {
+                    templateUrl: "/scripts/bizs/main.html",
+                    controller: "BizMainController"
+                }
+            }
         })
         .state("biz.dashboard", {
-            // 登录页面
             url: "/dashboard",
             templateUrl: "/scripts/bizs/dashboard.html",
             controller: "DashboardController"
         })
         .state("biz.practice", {
-            // 登录页面
             url: "/practice",
             templateUrl: "/scripts/bizs/practice/main.html"
         })
         .state("biz.practice.basicinfo", {
-            // 登录页面
             url: "/basicinfo/:id",
             templateUrl: "/scripts/bizs/practice/basicinfo/basicinfo.html",
             controller: "PracticeBasicinfoController"
+        })
+        .state("biz.practice.employees", {
+            url: "/employees/:id",
+            templateUrl: "/scripts/bizs/practice/employees/employees.html",
+            controller: "PracticeEmployeesController"
+        })
+        .state("biz.patients", {
+            url: "/patients",
+            templateUrl: "/scripts/bizs/patients/main.html"
+        })
+        .state("biz.patients.list", {
+            url: "/patients/list",
+            templateUrl: "/scripts/bizs/patients/patients.html",
+            controller: "PatientsController"
+        })
+        .state("biz.patients.details", {
+            url: "/patients/details/:id",
+            templateUrl: "/scripts/bizs/patients/details.html",
+            controller: "PatientDetailsController"
+        })
+        .state("biz.patients.addpatient", {
+            url: "/patients/new",
+            templateUrl: "/scripts/bizs/patients/new_patient.html",
+            controller: "PatientDetailsController"
         })
   })
     .run([
@@ -74,50 +107,58 @@ angular
         function($templateCache, $rootScope, $state, $stateParams, $location, $cookies, $http,
                  appConfig, accountService) {
 
-            var token = $cookies[appConfig.CH_AU_T_NAME];
-            if (token) {
-                accountService.checkTocken(token, "#")
-                    .success(function(data, status) {
-                        accountService.whenTockenValid(data);
-                        $rootScope.$state = $state;
-                        $rootScope.$stateParams = $stateParams;
 
-                        $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams) {
+            $rootScope.$state = $state;
+            $rootScope.$stateParams = $stateParams;
+
+            $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams) {
+            });
+            $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+            });
+            $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+                var isFromAuthorizePage = 0 === fromState.name.indexOf('authorize');
+                var isToAuthorizePage = 0 === toState.name.indexOf('authorize');
+                switch (toState.name) {
+                    case "authorize.login":
+                    case "authorize.logout":
+                    case "authorize.lockscreen":
+                        if (!isFromAuthorizePage) {
+                            $rootScope.previourState = fromState;
+                            $rootScope.previourStateParams = fromParams;
+                            $cookies.put(appConfig.CH_AU_T_NAME, '');
+                        }
+                        break;
+                    default:
+                        if (!isToAuthorizePage) {
+                            $rootScope.previourState = fromState;
+                            $rootScope.previourStateParams = fromParams;
+                        }
+                        break;
+                }
+
+                if (isToAuthorizePage){
+                    return;
+                }
+
+                var token = $cookies.get(appConfig.CH_AU_T_NAME);
+                if (token) {
+                    accountService.checkTocken(token, "#")
+                        .success(function(data, status) {
+                            accountService.whenTokenValid(data);
+                        })
+                        .error(function(data, status) {
+                            $rootScope.currentUser = null;
+                            $state.go("authorize.login", null, { location: true });
+                            event.preventDefault();
                         });
-                        $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-                        });
-                        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-                            var isFromAuthorizePage = 0 === fromState.name.indexOf('authorize');
-                            var isToAuthorizePage = 0 === toState.name.indexOf('authorize');
-                            switch (toState.name) {
-                                case "authorize.login":
-                                case "authorize.logout":
-                                case "authorize.lockscreen":
-                                    if (!isFromAuthorizePage) {
-                                        $rootScope.previourState = fromState;
-                                        $rootScope.previourStateParams = fromParams;
-                                        $cookies[appConfig.CH_AU_T_NAME] = '';
-                                    }
-                                    break;
-                                default:
-                                    if (!isToAuthorizePage) {
-                                        $rootScope.previourState = fromState;
-                                        $rootScope.previourStateParams = fromParams;
-                                    }
-                                    break;
-                            }
-                        });
-                        $rootScope.$on('$locationChangeStart', function(event, newUrl, oldUrl) {
-                        });
-                    })
-                    .error(function(data, status) {
-                        $rootScope.currentUser = null;
-                        $state.go("authorize.login", null, { location: true });
-                    });
-            } else {
-                $rootScope.currentUser = null;
-                $state.go("authorize.login", null, { location: true });
-            }
+                } else {
+                    $rootScope.currentUser = null;
+                    $state.go("authorize.login", null, { location: true });
+                    event.preventDefault();
+                }
+            });
+            $rootScope.$on('$locationChangeStart', function(event, newUrl, oldUrl) {
+            });
 
         }
     ]);

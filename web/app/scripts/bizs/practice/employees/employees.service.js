@@ -6,7 +6,7 @@ angular.module('chApp.practice.services').factory('employeesService',
     function ($state, $http, $rootScope, $cookies, $q, appConfig) {
 
         var service = {};
-        var _apiName = "/api/Practices/";
+        var _apiName = "/employees/";
 
         var oElements = {};
 
@@ -19,7 +19,7 @@ angular.module('chApp.practice.services').factory('employeesService',
                 }, 500);
                 promise = deferred.promise;
             } else {
-                promise = $http.get(appConfig.API_HOST + _apiName + practiceId + "/Employees");
+                promise = $http.get(appConfig.API_HOST + _apiName + "practice/" + practiceId);
             }
 
             return promise;
@@ -34,7 +34,7 @@ angular.module('chApp.practice.services').factory('employeesService',
                 }, 500);
                 promise = deferred.promise;
             } else {
-                promise = $http.get(appConfig.API_HOST + _apiName + practiceId + "/Employees/" + employeeId);
+                promise = $http.get(appConfig.API_HOST + _apiName + employeeId);
             }
 
             return promise;
@@ -49,7 +49,7 @@ angular.module('chApp.practice.services').factory('employeesService',
                 }, 500);
                 promise = deferred.promise;
             } else {
-                promise = $http.get(appConfig.API_HOST + _apiName + practiceId + "/EmployeeByUser/" + userId);
+                promise = $http.get(appConfig.API_HOST + _apiName + practiceId + "/" + userId);
             }
 
             return promise;
@@ -64,7 +64,11 @@ angular.module('chApp.practice.services').factory('employeesService',
                 }, 500);
                 promise = deferred.promise;
             } else {
-                promise = $http.post(appConfig.API_HOST + _apiName + practiceId + "/Employees/Insert", employee);
+                employee.practiceId = practiceId;
+                employee.provider.practiceLocation = employee.provider.practiceLocation.join("|");
+                employee.provider.specialties = employee.provider.specialties.join("|");
+                delete employee.practice;
+                promise = $http.post(appConfig.API_HOST + _apiName, employee);
             }
 
             return promise;
@@ -79,7 +83,7 @@ angular.module('chApp.practice.services').factory('employeesService',
                 }, 500);
                 promise = deferred.promise;
             } else {
-                promise = $http.post(appConfig.API_HOST + _apiName + practiceId + "/Employees/Update", employee);
+                promise = $http.put(appConfig.API_HOST + _apiName, employee);
             }
 
             return promise;
@@ -102,80 +106,50 @@ angular.module('chApp.practice.services').factory('employeesService',
 
         service.rowDataToObject = function (aData) {
             var i = 0;
-            return {
-                EmployeeId: aData[i++],
-                UserId: aData[i++],
-                PracticeId: aData[i++],
-                IsManager: aData[i++],
-                FamilyName: aData[i++],
-                GivenName: aData[i++],
-                BirthDate: aData[i++],
-                Gender: aData[i++],
-                Email: aData[i++],
-                Mobile: aData[i++],
-                Province: aData[i++],
-                City: aData[i++],
-                District: aData[i++],
-                Zip: aData[i++],
-                Address: aData[i++],
-                CertificateNo: aData[i++],
-                PracticeNo: aData[i++],
-                PracticeLocation: aData[i++],
-                PrimaryPracticeName: aData[i++],
-                ProfessionalRank: aData[i++],
-                Specialties: aData[i++],
-                Skills: aData[i++],
-                ApplyDate: aData[i++],
-                ApproveDate: aData[i++],
-                ApproveBy: aData[i++],
-                IsApproved: aData[i++],
-                IsPractice: aData[i++],
-                IsProvider: aData[i++],
-                IsPatient: aData[i++],
-                Status: aData[i++],
+            return aData[0] || {
+                "id": null,
+                "createOn": null,
+                "status": 4,
+                "createBy": null,
+                "modifyBy": null,
+                "modifyOn": null,
+                "practiceId": null,
+                "userId": null,
+                "manager": false,
+                "practice": null,
+                "provider": {
+                    "id": null,
+                    "createOn": null,
+                    "status": 4,
+                    "createBy": null,
+                    "modifyBy": null,
+                    "modifyOn": null,
+                    "applyOn": null,
+                    "approveOn": null,
+                    "approveBy": null,
+                    "certificateNo": null,
+                    "practiceNo": null,
+                    "practiceLocation": null,
+                    "primaryPracticeName": null,
+                    "professionalRank": null,
+                    "specialties": null,
+                    "skills": null,
+                    "approved": false,
+                    "userProfile": null
+                }
             };
         };
 
         service.objectToRowData = function (data) {
             return [
-                data.EmployeeId,
-                data.UserId,
-                data.PracticeId,
-                data.IsManager,
-                data.FamilyName,
-                data.GivenName,
-                data.BirthDate,
-                data.Gender,
-                data.Email,
-                data.Mobile,
-                data.Province,
-                data.City,
-                data.District,
-                data.Zip,
-                data.Address,
-                data.CertificateNo,
-                data.PracticeNo,
-                data.PracticeLocation,
-                data.PrimaryPracticeName,
-                data.ProfessionalRank,
-                data.Specialties,
-                data.Skills,
-                data.ApplyDate,
-                data.ApproveDate,
-                data.ApproveBy,
-                data.IsApproved,
-                data.IsPractice,
-                data.IsProvider,
-                data.IsPatient,
-                data.Status,
-
+                data,
                 null,
-                data.CertificateNo,
-                data.FamilyName + data.GivenName,
-                data.Gender,
-                data.ProfessionalRank,
-                data.Specialties,
-                data.Skills
+                data.provider.certificateNo,
+                data.provider.userProfile.familyName + data.provider.userProfile.givenName,
+                data.provider.userProfile.sex,
+                data.provider.professionalRank,
+                data.provider.specialties,
+                data.provider.skills
             ];
         };
 
@@ -186,8 +160,9 @@ angular.module('chApp.practice.services').factory('employeesService',
                 api.clear();
 
                 for (var i = 0; datas && i < datas.length; ++i) {
-                    api.row.add(service.objectToRowData(datas[i])).draw();
+                    api.row.add(service.objectToRowData(datas[i]));
                 }
+                api.draw();
             }
         };
 
@@ -201,11 +176,7 @@ angular.module('chApp.practice.services').factory('employeesService',
             var oOrderSetting = [[0, "asc"]];
             var oColumnSetting = [];
             var emptyObj = service.rowDataToObject([]);
-            var targets = [];
-            var index = 0;
-            for (var i in emptyObj) {
-                targets.push(index++);
-            }
+            var targets = [0];
 
             oColumnSetting.push({
                 "targets": targets,
@@ -255,19 +226,17 @@ angular.module('chApp.practice.services').factory('employeesService',
                 var data = service.rowDataToObject(aData);
                 var oOut = $('<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;"></table>');
 
-                if (data.IsProvider) {
-                    var oRow = $('<tr style="vertical-align: top;"><td><dl class="dl-horizontal"></dl></td><td><dl class="dl-horizontal"></dl></td></tr>');
+                var oRow = $('<tr style="vertical-align: top;"><td><dl class="dl-horizontal"></dl></td><td><dl class="dl-horizontal"></dl></td></tr>');
 
-                    $('dl:eq(0)', oRow).append('<dt>医师资格证编码</dt><dd>' + (data.CertificateNo || '') + '</dd>');
-                    $('dl:eq(0)', oRow).append('<dt>医师职称</dt><dd>' + (data.ProfessionalRank || '') + '</dd>');
-                    $('dl:eq(0)', oRow).append('<dt>医师专科</dt><dd>' + (data.Specialties || '') + '</dd>');
-                    $('dl:eq(0)', oRow).append('<dt>医师技能</dt><dd>' + (data.Skills || '') + '</dd>');
+                $('dl:eq(0)', oRow).append('<dt>医师资格证编码</dt><dd>' + (data.provider.certificateNo || '') + '</dd>');
+                $('dl:eq(0)', oRow).append('<dt>医师职称</dt><dd>' + (data.provider.professionalRank || '') + '</dd>');
+                $('dl:eq(0)', oRow).append('<dt>医师专科</dt><dd>' + (data.provider.specialties || '') + '</dd>');
+                $('dl:eq(0)', oRow).append('<dt>医师技能</dt><dd>' + (data.provider.skills || '') + '</dd>');
 
-                    $('dl:eq(1)', oRow).append('<dt>医师执业证编码</dt><dd>' + (data.PracticeNo || '') + '</dd>');
-                    $('dl:eq(1)', oRow).append('<dt>医师执业地区</dt><dd>' + (data.PracticeLocation || '') + '</dd>');
-                    $('dl:eq(1)', oRow).append('<dt>第一执业机构</dt><dd>' + (data.PrimaryPracticeName || '') + '</dd>');
-                    $(oOut).append(oRow);
-                }
+                $('dl:eq(1)', oRow).append('<dt>医师执业证编码</dt><dd>' + (data.provider.practiceNo || '') + '</dd>');
+                $('dl:eq(1)', oRow).append('<dt>医师执业地区</dt><dd>' + (data.provider.practiceLocation || '') + '</dd>');
+                $('dl:eq(1)', oRow).append('<dt>第一执业机构</dt><dd>' + (data.provider.primaryPracticeName || '') + '</dd>');
+                $(oOut).append(oRow);
 
                 return oOut.html();
             }
@@ -293,7 +262,8 @@ angular.module('chApp.practice.services').factory('employeesService',
 
             /*  Initialse DataTables, with no sorting on the 'details' column  */
             oTable = oTable.dataTable({
-                "dom": '<"toolbar" T>frtip',
+                "dom": "<'toolbar' T>frt<'row'<'col-md-6'i><'spcol-md-6an6'p>>",
+                //"dom": "<'row'<'col-md-12'f <'toolbar' T>>>t<'row'<'col-md-6'i><'spcol-md-6an6'p>>",
                 "order": oOrderSetting,
                 "tableTools": oTableTools,
                 "columnDefs": oColumnSetting,
@@ -304,7 +274,7 @@ angular.module('chApp.practice.services').factory('employeesService',
         };
 
         service.initInsertModal = function (practiceId, selector, insertModal, rowDataChangedCallback) {
-            var token = $cookies[appConfig.CH_AU_T_NAME];
+            var token = $cookies.get(appConfig.CH_AU_T_NAME);
             var tokenName = appConfig.CH_AU_T_NAME;
 
             var oModal = $(insertModal || ".insertModal", selector);
@@ -331,7 +301,7 @@ angular.module('chApp.practice.services').factory('employeesService',
                         };
                         return $.ajax(params);
                     },
-                    url: appConfig.API_HOST + _apiName + practiceId + "/UnincludeUsers",
+                    url: appConfig.API_HOST + _apiName + "practice/" + practiceId + "/users",
                     dataType: 'json',
                     delay: 250,
                     data: function (params) {
@@ -355,6 +325,7 @@ angular.module('chApp.practice.services').factory('employeesService',
             $(userSelector).on("select2-selected", function (e) {
                 var userId = e.choice.id;
                 service.getEmployeeByUser(practiceId, userId).then(function (result) {
+                    result.data.provider.userProfile.dob = moment(+result.data.provider.userProfile.dob).format("YYYY-MM-DD");
                     if (typeof rowDataChangedCallback === "function") {
                         rowDataChangedCallback(result.data);
                     }

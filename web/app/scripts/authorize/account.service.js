@@ -99,7 +99,7 @@ angular.module('chApp.authorize.services').factory('accountService', [
 	}
 
 	service.checkTocken = function (token, state) {
-	    var promise = $http.get(appConfig.API_HOST + "/user/authenticate" + token);
+	    var promise = $http.get(appConfig.API_HOST + "/user/authenticate/" + token);
 	    return promise;
 	};
 
@@ -107,7 +107,7 @@ angular.module('chApp.authorize.services').factory('accountService', [
         $rootScope.currentUser = _setCurrentUser(data);
 
         $http.defaults.headers.common[appConfig.CH_AU_T_NAME] = data.token;
-        $cookies[appConfig.CH_AU_T_NAME] = data.token;
+        $cookies.put(appConfig.CH_AU_T_NAME, data.token);
 
 
         if ($rootScope.previourState && $rootScope.previourState.name && $rootScope.previourState.name.indexOf("authorize") != 0) {
@@ -120,8 +120,8 @@ angular.module('chApp.authorize.services').factory('accountService', [
     service.whenTokenValid = function (data) {
         $rootScope.currentUser = _setCurrentUser(data);
 
-        $http.defaults.headers.common[appConfig.CH_AU_T_NAME] = data.AuthTocken;
-        $cookies[appConfig.CH_AU_T_NAME] = data.AuthTocken;
+        $http.defaults.headers.common[appConfig.CH_AU_T_NAME] = data.token;
+        $cookies.put(appConfig.CH_AU_T_NAME, data.token);
     };
 
     function _redirectToPortal(currentUser) {
