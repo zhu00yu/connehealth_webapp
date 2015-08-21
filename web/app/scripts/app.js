@@ -98,7 +98,7 @@ angular
         .state("biz.patients.addpatient", {
             url: "/patients/new",
             templateUrl: "/scripts/bizs/patients/new_patient.html",
-            controller: "PatientDetailsController"
+            controller: "NewPatientController"
         })
   })
     .run([

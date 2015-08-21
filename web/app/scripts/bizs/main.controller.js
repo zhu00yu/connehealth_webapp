@@ -70,7 +70,7 @@
         $scope.isActive = function (viewLocation) {
             var item = _.find(allItems, function(item){ return item.state ==  $state.current.name });
 
-            return viewLocation === $state.current.name || viewLocation == item.parent;
+            return viewLocation === $state.current.name || (item && viewLocation == item.parent);
         };
         applicationService.init();
     }

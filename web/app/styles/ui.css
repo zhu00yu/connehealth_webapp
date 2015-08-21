@@ -3009,7 +3009,7 @@ input:-webkit-autofill {
 .prepend-icon input {
   padding-left: 36px;
 }
-.prepend-icon span {
+.prepend-icon > span {
   padding-left: 36px;
 }
 .prepend-icon i {

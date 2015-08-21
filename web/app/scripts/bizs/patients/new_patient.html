@@ -1,1 +1,344 @@
-<h3>new patients</h3>
+
+
+<form role="form">
+<div class="row">
+<div class="col-md-12">
+<div panel-box-directive>
+    <div panel-box-header-directive header-title="基础信息"></div>
+    <div panel-box-content-directive>
+        <div class="row">
+            <div class="col-md-4">
+                <div image-file-input-directive label="上传头像" fileurl="dot.patientPhotoFileUrl" fileid="dto.patientPhotoFileId" filedata="dto.patientPhotoFileData" fileread="dto.patientPhotoFileRead"></div>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>姓名</label>
+                            <div class="prepend-icon">
+                                <input type="text" ng-model="dto.patient.patientName" class="form-control form-white" placeholder="患者姓名">
+                                <i class="icon-user"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>性别</label>
+                            <div class="prepend-icon">
+                                <select select2-directive ng-model="dto.patient.sex" class="form-control form-white" data-placeholder="性别">
+                                    <option selected="selected">男</option>
+                                    <option>女</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>生日</label>
+                            <div class="prepend-icon">
+                                <input type="text" ng-model="dto.patient.dob" class="form-control form-white" placeholder="生日">
+                                <i class="icon-user"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>血型</label>
+                            <div class="prepend-icon">
+                                <select select2-directive ng-model="dto.patient.bloodType" class="form-control form-white" data-placeholder="血型">
+                                    <option selected="selected">O</option>
+                                    <option>A</option>
+                                    <option>B</option>
+                                    <option>AB</option>
+                                    <option>RH+</option>
+                                    <option>RH-</option>
+                                    <option>D缺失型</option>
+                                    <option>AA</option>
+                                    <option>Ai</option>
+                                    <option>BB</option>
+                                    <option>Bi</option>
+                                    <option>ii</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>人种</label>
+                            <div class="prepend-icon">
+                                <select select2-directive ng-model="dto.patient.ethnicity" class="form-control form-white" data-placeholder="人种">
+                                    <option selected="selected">黄种人</option>
+                                    <option>白种人</option>
+                                    <option>黑人</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>民族</label>
+                            <div class="prepend-icon">
+                                <select select2-directive ng-model="dto.patient.race" class="form-control form-white" data-placeholder="民族">
+                                    <option selected="selected">汉族</option>
+                                    <option>其他</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>国籍</label>
+                    <div class="prepend-icon">
+                        <select select2-directive ng-model="dto.patient.nationality" class="form-control form-white" data-placeholder="国籍">
+                            <option selected="selected">中国</option>
+                            <option>美国</option>
+                            <option>英国</option>
+                            <option>其他</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>籍贯</label>
+                    <div class="prepend-icon">
+                        <input type="text" ng-model="dto.patient.nativePlace" class="form-control form-white" placeholder="籍贯">
+                        <i class="icon-user"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>首选语言</label>
+                    <div class="prepend-icon">
+                        <select select2-directive ng-model="dto.patient.preferredLanguage" class="form-control form-white" data-placeholder="首选语言">
+                            <option selected="selected">汉语</option>
+                            <option>English</option>
+                            <option>其他</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>医疗保险卡号</label>
+                    <div class="prepend-icon">
+                        <input type="text" ng-model="dto.patient.ssn" class="form-control form-white" placeholder="医疗保险卡号">
+                        <i class="icon-user"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>身份证</label>
+                    <div class="prepend-icon">
+                        <input type="text" ng-model="dto.patient.idNo" class="form-control form-white" placeholder="身份证号码">
+                        <i class="icon-user"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>婚姻状况</label>
+                    <div class="prepend-icon">
+                        <select select2-directive ng-model="dto.patient.maritalStatus" class="form-control form-white" data-placeholder="婚姻状况">
+                            <option selected="selected">未婚</option>
+                            <option>已婚</option>
+                            <option>离婚</option>
+                            <option>丧偶</option>
+                            <option>未知</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>行业</label>
+                    <div class="prepend-icon">
+                        <select select2-directive ng-model="dto.patient.industry" class="form-control form-white" data-placeholder="行业">
+                            <option selected="selected">计算机</option>
+                            <option>建筑工人</option>
+                            <option>其他</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div panel-box-directive>
+    <div panel-box-header-directive header-title="联系方式"></div>
+    <div panel-box-content-directive>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>电子邮箱</label>
+                    <div class="prepend-icon">
+                        <input type="text" ng-model="dto.patient.email" class="form-control form-white" placeholder="邮箱">
+                        <i class="icon-user"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>移动电话</label>
+                    <div class="prepend-icon">
+                        <input type="text" ng-model="dto.patient.mobile" class="form-control form-white" placeholder="移动电话">
+                        <i class="icon-user"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>单位电话</label>
+                    <div class="prepend-icon">
+                        <input type="text" ng-model="dto.patient.workPhone" class="form-control form-white" placeholder="单位电话">
+                        <i class="icon-user"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>工作单位</label>
+                    <div class="prepend-icon">
+                        <input type="text" ng-model="dto.patient.company" class="form-control form-white" placeholder="工作单位">
+                        <i class="icon-user"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>单位地址</label>
+                    <div class="prepend-icon">
+                        <input type="text" ng-model="dto.patient.workAddress" class="form-control form-white" placeholder="单位地址">
+                        <i class="icon-user"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>邮编</label>
+                    <div class="prepend-icon">
+                        <input type="text" ng-model="dto.patient.workZip" class="form-control form-white" placeholder="邮编">
+                        <i class="icon-user"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>联系人</label>
+                    <div class="prepend-icon">
+                        <input type="text" ng-model="dto.patient.contactPerson" class="form-control form-white" placeholder="联系人">
+                        <i class="icon-user"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>关系</label>
+                    <div class="prepend-icon">
+                        <select select2-directive ng-model="dto.patient.contactRelationship" class="form-control form-white" data-placeholder="关系">
+                            <option selected="selected">爷爷</option>
+                            <option>奶奶</option>
+                            <option>父亲</option>
+                            <option>母亲</option>
+                            <option>子女</option>
+                            <option>同学</option>
+                            <option>同事</option>
+                            <option>朋友</option>
+                            <option>其他</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>联系人电话</label>
+                    <div class="prepend-icon">
+                        <input type="text" ng-model="dto.patient.contactPhone" class="form-control form-white" placeholder="联系人电话">
+                        <i class="icon-user"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>家庭地址</label>
+                    <div class="prepend-icon">
+                        <input type="text" ng-model="dto.patient.homeAddress" class="form-control form-white" placeholder="家庭地址">
+                        <i class="icon-user"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>邮编</label>
+                    <div class="prepend-icon">
+                        <input type="text" ng-model="dto.patient.homeZip" class="form-control form-white" placeholder="邮编">
+                        <i class="icon-user"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>居住地址</label>
+                    <div class="prepend-icon">
+                        <input type="text" ng-model="dto.patient.registeredAddress" class="form-control form-white" placeholder="居住地址">
+                        <i class="icon-user"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>邮编</label>
+                    <div class="prepend-icon">
+                        <input type="text" ng-model="dto.patient.registeredZip" class="form-control form-white" placeholder="邮编">
+                        <i class="icon-user"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="text-right">
+            <button type="button" ng-click="submitPatientInfo()" class="btn btn-primary">提交</button>
+            <button type="button" class="btn">返回</button>
+            <button type="button" ng-click="gotoDetails()" class="btn">test close tab</button>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+</form>
