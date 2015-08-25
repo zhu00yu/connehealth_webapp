@@ -42,6 +42,11 @@ angular.module('chApp.common.directives').directive('imageFileInputDirective', [
                 }
                 reader.readAsDataURL(fileread);
             });
+            scope.$watch("filedata", function(newValue, oldValue){
+                if (newValue){
+                    $(element).find(".fileinput-new img").prop("src", newValue);
+                }
+            });
         }
     };
 }]);

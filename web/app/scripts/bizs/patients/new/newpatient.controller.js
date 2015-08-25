@@ -23,7 +23,7 @@
         });
         $scope.gotoDetails = function(id){
             var url = $location.$$path;
-            $state.go("biz.patients.details", {id: id || 0});
+            $state.go("biz.patients.details", {patientId: id || 0});
             $timeout(function(){
                 tabService.closeTab('patients', url, true);
             }, 200);

@@ -69,18 +69,15 @@ angular.module('chApp.authorize.services').factory('accountService', [
 	// 注册某个用户
 	service.registerUser = function (userDto) {
 	    var data = userDto;
-	    if (data.ProviderBusinessInfo) {
-	        if (typeof data.ProviderBusinessInfo.PracticeLocation === "object") {
-	            data.ProviderBusinessInfo.PracticeLocation = data.ProviderBusinessInfo.PracticeLocation.join("|");
-	        }
-	        
-	        if (typeof data.ProviderBusinessInfo.Specialties === "object") {
-	            data.ProviderBusinessInfo.Specialties = data.ProviderBusinessInfo.Specialties.join("|");
-	        }
-	    }
-	    //data.UserProfile.Sex = data.UserProfile.Sex == "男" ? 1 : 0;
-	    //data = {User: {UserName:"abc", Password:"123"} };
-	    var promise = $http.post(appConfig.API_HOST + "/Account/Register", data);
+        if (typeof data.practiceLocation === "object") {
+            data.practiceLocation = data.practiceLocation.join("|");
+        }
+
+        if (typeof data.specialties === "object") {
+            data.specialties = data.specialties.join("|");
+        }
+
+	    var promise = $http.post(appConfig.API_HOST + "/user/authenticate/register", data);
 	    return promise;
 	}
 	service.loginUser = function (name, password, practiceId) {
@@ -126,15 +123,6 @@ angular.module('chApp.authorize.services').factory('accountService', [
 
     function _redirectToPortal(currentUser) {
         var portalState = "dashboard";
-/*
-        if (currentUser.isAdmin) {
-            portalState = "practice." + portalState;
-        } else if (currentUser.isUser) {
-            portalState = "charts." + portalState;
-        } else if (currentUser.isPatient) {
-            portalState = "patient." + portalState;
-        }
-*/
         portalState = "biz." + portalState;
         $state.go(portalState, { id: $rootScope.currentUser.name });
     }
@@ -154,21 +142,6 @@ angular.module('chApp.authorize.services').factory('accountService', [
             isUser: isUser,
             isAdmin: isAdmin
         };
-
-        /*data.Employee = data.Employee || {};
-        return {
-            id: data.User.Id,
-            name: data.User.UserName,
-            familyName: data.UserProfile.FamilyName,
-            givenName: data.UserProfile.GivenName,
-            isPatient: data.IsPatient,
-            isProvider: data.IsProvider,
-            isPractice: data.IsPractice,
-            authTocken: data.AuthTocken,
-
-            employeeId: (data.Employee || {}).Id,
-            practiceId: (data.PracticeInfo || {}).Id,
-        };*/
     }
 
 	return service;

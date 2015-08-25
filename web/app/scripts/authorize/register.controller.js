@@ -1,16 +1,17 @@
 ﻿angular.module('chApp.authorize.controllers').controller('RegisterController', ['$scope', '$rootScope', '$state', '$stateParams', '$location', 'appConfig', 'accountService',
     function ($scope, $rootScope, $state, $stateParams, $location, appConfig, accountService) {
         $rootScope.currentUser = null;
-        $rootScope.isLogin = true;
-        $scope.isForPatient = $stateParams.type === 'patient';
-        $scope.isForProvider = $stateParams.type === 'provider';
-        $scope.isForPractice = $stateParams.type === 'practice';
 
-        $scope.userDto = accountService.getNewUser({ IsProvider: $scope.isForProvider, IsPractice: $scope.isForPractice });
+        $scope.practices = [];
+        $scope.userDto = {};
 
-        $scope.registerUser = function(userDto) {
-            //console.log(userDto);
-            accountService.registerUser(userDto)
+        accountService.getPractices().success(function(result){
+            $scope.practices = result;
+        });
+
+        $scope.registerUser = function() {
+            var dto = $scope.userDto;
+            accountService.registerUser(dto)
                 .success(function(data, status) {
                     _onUserLogin(data);
                 })

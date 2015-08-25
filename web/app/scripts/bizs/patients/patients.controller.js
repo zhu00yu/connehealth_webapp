@@ -26,7 +26,7 @@
                 oElements = patientService.initWidgets(element,
                     function (patient) {
                         if (patient){
-                            $state.go("biz.patients.details", {id: patient.id});
+                            $state.go("biz.patients.details", {patientId: patient.id});
                         } else {
                             $state.go("biz.patients.addpatient");
                         }

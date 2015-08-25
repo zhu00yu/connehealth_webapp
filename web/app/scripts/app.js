@@ -48,10 +48,24 @@ angular
             }
         })
         .state("authorize.login", {
-            // 登录页面
             url: "/login",
             templateUrl: "/scripts/authorize/login.html",
             controller: "LoginController"
+        })
+        .state("authorize.register", {
+            url: "/login",
+            templateUrl: "/scripts/authorize/register.html",
+            controller: "RegisterController"
+        })
+        .state("authorize.lockscreen", {
+            url: "/lockscreen",
+            templateUrl: "/scripts/authorize/lockscreen.html",
+            controller: "LockscreenController"
+        })
+        .state("authorize.logout", {
+            url: "/logout",
+            template: "",
+            controller: "LogoutController"
         })
         .state("biz", {
             url: "/biz",
@@ -91,13 +105,28 @@ angular
             controller: "PatientsController"
         })
         .state("biz.patients.details", {
-            url: "/patients/details/:id",
-            templateUrl: "/scripts/bizs/patients/details.html",
+            url: "/patients/details/{patientId}",
+            templateUrl: "/scripts/bizs/patients/details/details.html",
             controller: "PatientDetailsController"
+        })
+        .state("biz.patients.details.profile", {
+            url: "/profile",
+            templateUrl: "/scripts/bizs/patients/details/details_profile.html",
+            controller: "PatientDetailsProfileController"
+        })
+        .state("biz.patients.details.summary", {
+            url: "/summary",
+            templateUrl: "/scripts/bizs/patients/details/details_summary.html",
+            controller: "PatientDetailsSummaryController"
+        })
+        .state("biz.patients.details.timeline", {
+            url: "/timeline",
+            templateUrl: "/scripts/bizs/patients/details/details_timeline.html",
+            controller: "PatientDetailsTimeLineController"
         })
         .state("biz.patients.addpatient", {
             url: "/patients/new",
-            templateUrl: "/scripts/bizs/patients/new_patient.html",
+            templateUrl: "/scripts/bizs/patients/new/new_patient.html",
             controller: "NewPatientController"
         })
   })

@@ -17,6 +17,18 @@ angular.module('chApp.patients.services').factory('patientService', ['$http', '$
             alert('XHR Failed for getPatients.' + error.data);
         }
     };
+    service.getPatient = function (patientId) {
+        return $http.get(appConfig.API_HOST + _apiName + patientId)
+                    .then(getPatientsComplete)
+                    .catch(getPatientsFailed);
+
+        function getPatientsComplete(response) {
+            return response.data;
+        }
+        function getPatientsFailed(error) {
+            //alert('XHR Failed for getPatients.' + error.data);
+        }
+    };
     //获取某个患者
     service.getPatientSummary = function (patientId) {
         return $http.get(appConfig.API_HOST + _apiName + patientId + '/summary')
@@ -44,8 +56,8 @@ angular.module('chApp.patients.services').factory('patientService', ['$http', '$
         }
     }
     //保存某个患者
-    service.savePatient = function (patient) {
-        return $http.put(appConfig.API_HOST + _apiName, patient)
+    service.savePatient = function (patientId, patient) {
+        return $http.put(appConfig.API_HOST + _apiName + patientId, patient)
                     .then(savePatientSummaryComplete)
                     .catch(savePatientSummaryFailed);
 
@@ -59,7 +71,7 @@ angular.module('chApp.patients.services').factory('patientService', ['$http', '$
 
     service.getPatientFileUrl = function (fileData, fileId) {
         if (fileId) {
-            return appConfig.API_HOST + "/patient-files/" + fileId;
+            return appConfig.API_HOST + "/patient-files/" + fileId + "/data";
         } else {
             return fileData || "images/patient.svg";
         }
@@ -82,6 +94,11 @@ angular.module('chApp.patients.services').factory('patientService', ['$http', '$
             promise = $http.post(appConfig.API_HOST + "/patient-files", data);
         }
 
+        return promise;
+    };
+
+    service.getPatientFile = function(patientId){
+        var promise = $http.get(appConfig.API_HOST + "/patient-files/" + patientId);
         return promise;
     };
 

@@ -7,15 +7,15 @@
             return;
         }
 
-        $rootScope.isLogin = true;
         $rootScope.isLoockscreen = true;
 
         $scope.fullName = user.familyName + user.givenName;
-        $scope.name = user.name;
+        $scope.name = user.userName;
         $scope.password = null;
+        $scope.practiceId = user.practiceId;
 
         $scope.loginUser = function (name, password) {
-            accountService.loginUser(name, password)
+            accountService.loginUser(name, password, $scope.practiceId)
                 .success(function (data, status) {
                     _onUserLogin(data);
                 })
@@ -26,7 +26,6 @@
 
         function _onUserLogin(data) {
             accountService.whenUserLogined(data);
-            $rootScope.isLogin = false;
             $rootScope.isLoockscreen = false;
         }
     }

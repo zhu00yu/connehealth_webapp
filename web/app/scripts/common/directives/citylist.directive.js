@@ -1,7 +1,25 @@
 ﻿'use strict';
 
 angular.module('chApp.common.directives').directive('citylistDirective', ['$compile', '$timeout', function ($compile, $timeout) {
-    var template = '<select ng-model="location" class="form-control form-white" multiple="multiple" placeholder="{{placeholder}}"><option></option><option ng-repeat="city in cities" value="{{city[0]}}">{{city[1]}}</option></select>';
+//    var template = '<select ng-model="location" class="form-control form-white" multiple="multiple" placeholder="{{placeholder}}"><option></option><option ng-repeat="city in cities" value="{{city[0]}}">{{city[1]}}</option></select>';
+    var template = '<select ng-model="location" class="form-control form-white" multiple="multiple" placeholder="{{placeholder}}"><option></option></select>';
+    function format(state) {
+        var state_id = state.id;
+        if (!state_id) return state.text; // optgroup
+        return state.text;
+    }
+    function renderSelector(elem, value) {
+        $(elem).select2("destroy");
+        var settings = {
+            formatResult: format,
+            formatSelection: format,
+            minimumResultsForSearch: true,
+            dropdownCssClass: 'form-white',
+            allowClear: true,
+        };
+        $(elem).select2(settings);
+        value && $(elem).select2("val", value);
+    }
     return {
         restrict: 'A',
         replace: true,
@@ -16,50 +34,24 @@ angular.module('chApp.common.directives').directive('citylistDirective', ['$comp
             locationsService.loadLocations();
 
             var wa = $scope.$watch('location', function (newValue, oldValue) {
-                wa();
                 if (newValue && typeof newValue === "string") {
                     $scope.location = newValue.split('|');
                 }
+            });
+
+            $scope.loadCities = function(){
                 locationsService.loadLocations(function (provinces, locations) {
-                    var datas = _.map(locations, function (r, key) {
+                    var data = _.map(locations, function (r, key) {
                         return [r.region_id, r.fullname, r.zip_number, r.code];
                     });
-                    $scope.cities = datas;
+                    $scope.cities = data;
                 });
-            });
+            };
 
         }],
         template: template,
+/*
         compile: function (element, attrs, transclude) {
-            function format(state) {
-                var state_id = state.id;
-                if (!state_id) return state.text; // optgroup
-                return state.text;
-            }
-            function makeOptionsData(datas) {
-                var data = { results: [] };
-                var options = datas;
-                for (var i = 0; options && i < options.length; i++) {
-                    data.results.push({ id: options[i][0], text: options[i][1] });
-                }
-                return data;
-            }
-            function renderSelector(elem, options, value) {
-                $(elem).select2("destroy");
-                var settings = {
-                    formatResult: format,
-                    formatSelection: format,
-                    minimumResultsForSearch: true,
-                    dropdownCssClass: 'form-white',
-                    allowClear: true,
-                };
-                if ($(elem).is('select')) {
-                } else {
-                    settings.data = options;
-                }
-                $(elem).select2(settings);
-                value && $(elem).select2("val", value);
-            }
 
 
             return function (scope, element, attrs) {
@@ -75,7 +67,25 @@ angular.module('chApp.common.directives').directive('citylistDirective', ['$comp
                 });
             };
         },
+*/
         link: function (scope, element, attrs, ctrl) {
+            scope.$watch('cities', function (newValue, oldValue) {
+                console.log(new Date()+newValue.length);
+                if (newValue && newValue.length){
+
+//                    $(element).empty();
+//                    $(element).append("<option></option>");
+                    _.each(scope.cities, function(c){
+                        $(element).append("<option value="+c[0]+">"+c[1]+"</option>");
+                    });
+
+                    $(element).select2("val", scope.location);
+                }
+            });
+            $timeout(function () {
+                renderSelector($(element), scope.location);
+                scope.loadCities();
+            }, 800);
         }
     };
 }]);
