@@ -34,7 +34,7 @@
             <li  ng-class="{active  : isActive('biz.patients.details.summary')}"><a ui-sref="biz.patients.details.summary({patientId:patientId})" style="background-color: transparent !important;"><i class="icon-user"></i> 医疗小结</a></li>
             <li  ng-class="{active  : isActive('biz.patients.details.timeline')}"><a ui-sref="biz.patients.details.timeline({patientId:patientId})" style="background-color: transparent !important;"><i class="icon-cloud-download"></i> 时间线</a></li>
         </ul>
-        <div class="tab-content">
+        <div class="tab-content" style="background-color: transparent !important;">
             <div class="tab-pane fade active in" ui-view>
                 <div class="patientProfile" ng-hide="isEditing">
                     <style>

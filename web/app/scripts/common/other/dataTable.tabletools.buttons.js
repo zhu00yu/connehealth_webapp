@@ -1,4 +1,5 @@
-﻿$(function () {
+﻿'use strict';
+$(function () {
     
     function initTableToolsButtons() {
         $.fn.dataTable.TableTools.buttons.open_modal = $.extend(

@@ -1,4 +1,5 @@
-﻿angular.module('chApp.practice.controllers').controller('PracticeBasicinfoController',
+﻿'use strict';
+angular.module('chApp.practice.controllers').controller('PracticeBasicinfoController',
     ['$scope', '$rootScope', '$state', '$stateParams', '$location', '$q', 'tabService', 'basicInfoService',
     function ($scope, $rootScope, $state, $stateParams, $location, $q, tabService, basicInfoService) {
         //加载tab页

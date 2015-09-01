@@ -1,4 +1,5 @@
-﻿angular.module('chApp.biz.controllers').controller('BizMainController', [
+﻿'use strict';
+angular.module('chApp.biz.controllers').controller('BizMainController', [
     '$scope', '$rootScope', '$state', '$stateParams', '$location', '$http', '$cookies', 'appConfig', 'applicationService',
     function ($scope, $rootScope, $state, $stateParams, $location, $http, $cookies, appConfig, applicationService) {
         var user = $rootScope.currentUser;

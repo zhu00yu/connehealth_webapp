@@ -17,10 +17,11 @@ var windowHeight = $(window).height();
 var topbarWidth = $('.topbar').width();
 var headerLeftWidth = $('.header-left').width();
 var headerRightWidth = $('.header-right').width();
-var start = delta = end = 0;
+var start = 0;
+var delta = 0;
+var end = 0;
 
 //$.cookie.defaults.path = '/';
-
 angular.module('chApp.services').factory('applicationService', ['pluginsService', function (pluginsService) {
 
     $(window).load(function () {

@@ -42,6 +42,7 @@ module.exports = function(config) {
       'bower_components/deepcopy/deepcopy.min.js',
       'bower_components/jsbarcode/JsBarcode.js',
       'bower_components/jsbarcode/CODE128.js',
+      'bower_components/select2/select2.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

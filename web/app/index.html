@@ -1,10 +1,17 @@
 <!doctype html>
 <html class="no-js">
-  <head>
+<head>
     <meta charset="utf-8">
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="styles/icons/font-awesome/font-awesome.css">
+    <link rel="stylesheet" href="styles/icons/line-icons/line-icons.css">
+    <link rel="stylesheet" href="styles/icons/line-icons/simple-line-icons.css">
+    <link rel="stylesheet" href="styles/icons/rounded/style.css">
+    <link rel="stylesheet" href="styles/icons/octicons/octicons.css">
+    <link rel="stylesheet" href="styles/icons/weather/css/weather-icons.min.css">
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
@@ -13,115 +20,121 @@
     <link rel="stylesheet" href="bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.css" />
     <link rel="stylesheet" href="bower_components/datatables/media/css/dataTables.bootstrap.css" />
     <link rel="stylesheet" href="bower_components/datatables-tabletools/css/dataTables.tableTools.css" />
+    <link rel="stylesheet" href="bower_components/select2/select2.css" />
+    <link rel="stylesheet" href="bower_components/select2/select2-bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
+
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/theme.css">
     <link rel="stylesheet" href="styles/ui.css">
 
 
-    <link rel="stylesheet" href="scripts/common/other/common.css">
-    <link rel="stylesheet" href="scripts/common/vendors/select2/select2.css">
+    <link rel="stylesheet" href="styles/common.css">
+    <!--<link rel="stylesheet" href="vendors/select2/select2.css">-->
     <!-- endbuild -->
-  </head>
-  <body ng-app="chApp" ng-controller="MainController as mainController"
-    class="sidebar-condensed fixed-topbar fixed-sidebar theme-sdtl color-blue bg-dark-blue">
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+</head>
+<body ng-app="chApp" ng-controller="MainController as mainController"
+      class="sidebar-condensed fixed-topbar fixed-sidebar theme-sdtl color-blue bg-dark-blue">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div ui-view="main"><h3>Loading ...</h3></div>
-
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID
-     <script>
-       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-       }(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
-    -->
-
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
-    <script src="bower_components/underscore/underscore.js"></script>
-    <script src="bower_components/moment/moment.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.js"></script>
-    <script src="bower_components/blockui/jquery.blockUI.js"></script>
-    <script src="bower_components/bootbox/bootbox.js"></script>
-    <script src="bower_components/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
-    <script src="bower_components/jquery-cookie/jquery.cookie.js"></script>
-    <script src="bower_components/datatables/media/js/jquery.dataTables.js"></script>
-    <script src="bower_components/datatables/media/js/dataTables.bootstrap.js"></script>
-    <script src="bower_components/datatables-tabletools/js/dataTables.tableTools.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/deepcopy/deepcopy.min.js"></script>
-    <script src="bower_components/jsbarcode/JsBarcode.js"></script>
-    <script src="bower_components/jsbarcode/CODE128.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
-
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
-
-    <script src="scripts/common/vendors/select2/select2.js"></script>
-
-    <script src="scripts/common/other/common.js"></script>
-    <script src="scripts/common/other/dataTable.tabletools.buttons.js"></script>
+<!-- Add your site or application content here -->
+<div ui-view="main"><h3>Loading ...</h3></div>
 
 
-    <script src="scripts/app.js"></script>
-    <script src="scripts/common/data/appconfig.constant.js"></script>
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID
+ <script>
+   !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+   (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+   r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+   }(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    <script src="scripts/common/other/application.js"></script>
-    <script src="scripts/common/other/plugins.js"></script>
-    <script src="scripts/common/other/main.controller.js"></script>
+   ga('create', 'UA-XXXXX-X');
+   ga('send', 'pageview');
+</script>
+-->
 
-    <script src="scripts/common/services/locations.service.js"></script>
-    <script src="scripts/common/services/tab.service.js"></script>
-    <script src="scripts/common/directives/backstretch.directive.js"></script>
-    <script src="scripts/common/directives/citylist.directive.js"></script>
-    <script src="scripts/common/directives/imagefileinput.directive.js"></script>
-    <script src="scripts/common/directives/location.directive.js"></script>
-    <script src="scripts/common/directives/noty.directive.js"></script>
-    <script src="scripts/common/directives/panelbox.directive.js"></script>
-    <script src="scripts/common/directives/select2.directive.js"></script>
-    <script src="scripts/common/directives/specialist.directive.js"></script>
-    <script src="scripts/common/directives/tab.directive.js"></script>
-    <script src="scripts/common/directives/treeview.directive.js"></script>
-    <script src="scripts/common/directives/barcode128.directive.js"></script>
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/jquery-ui/jquery-ui.js"></script>
+<script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.js"></script>
+<script src="bower_components/blockui/jquery.blockUI.js"></script>
+<script src="bower_components/bootbox/bootbox.js"></script>
+<script src="bower_components/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+<script src="bower_components/jquery-cookie/jquery.cookie.js"></script>
+<script src="bower_components/datatables/media/js/jquery.dataTables.js"></script>
+<script src="bower_components/datatables/media/js/dataTables.bootstrap.js"></script>
+<script src="bower_components/datatables-tabletools/js/dataTables.tableTools.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/deepcopy/deepcopy.min.js"></script>
+<script src="bower_components/jsbarcode/JsBarcode.js"></script>
+<script src="bower_components/jsbarcode/CODE128.js"></script>
+<script src="bower_components/select2/select2.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
 
-    <script src="scripts/authorize/account.service.js"></script>
-    <script src="scripts/authorize/login.controller.js"></script>
-    <script src="scripts/authorize/lockscreen.controller.js"></script>
-    <script src="scripts/authorize/logout.controller.js"></script>
-    <script src="scripts/authorize/register.controller.js"></script>
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
 
-    <script src="scripts/bizs/main.controller.js"></script>
-    <script src="scripts/bizs/dashboard.controller.js"></script>
-    <script src="scripts/bizs/practice/practice.service.js"></script>
+<!--<script src="vendors/select2/select2.js"></script>-->
 
-    <script src="scripts/bizs/practice/basicinfo/basicinfo.service.js"></script>
-    <script src="scripts/bizs/practice/basicinfo/basicinfo.controller.js"></script>
-    <script src="scripts/bizs/practice/employees/employees.service.js"></script>
-    <script src="scripts/bizs/practice/employees/employees.controller.js"></script>
-    <script src="scripts/bizs/patients/patient.service.js"></script>
-    <script src="scripts/bizs/patients/patients.controller.js"></script>
-    <script src="scripts/bizs/patients/new/newpatient.controller.js"></script>
-    <script src="scripts/bizs/patients/details/patient.details.controller.js"></script>
-    <script src="scripts/bizs/patients/details/patient.details.profile.controller.js"></script>
-    <script src="scripts/bizs/patients/details/patient.details.summary.controller.js"></script>
-    <script src="scripts/bizs/patients/details/patient.details.timeline.controller.js"></script>
-    <!-- endbuild -->
+<script src="scripts/common/other/common.js"></script>
+<script src="scripts/common/other/dataTable.tabletools.buttons.js"></script>
+
+
+<script src="scripts/app.js"></script>
+<script src="scripts/common/data/appconfig.constant.js"></script>
+
+<script src="scripts/common/other/application.js"></script>
+<script src="scripts/common/other/plugins.js"></script>
+<script src="scripts/common/other/main.controller.js"></script>
+
+<script src="scripts/common/services/locations.service.js"></script>
+<script src="scripts/common/services/tab.service.js"></script>
+<script src="scripts/common/directives/backstretch.directive.js"></script>
+<script src="scripts/common/directives/citylist.directive.js"></script>
+<script src="scripts/common/directives/imagefileinput.directive.js"></script>
+<script src="scripts/common/directives/location.directive.js"></script>
+<script src="scripts/common/directives/noty.directive.js"></script>
+<script src="scripts/common/directives/panelbox.directive.js"></script>
+<script src="scripts/common/directives/select2.directive.js"></script>
+<script src="scripts/common/directives/specialist.directive.js"></script>
+<script src="scripts/common/directives/tab.directive.js"></script>
+<script src="scripts/common/directives/treeview.directive.js"></script>
+<script src="scripts/common/directives/barcode128.directive.js"></script>
+
+<script src="scripts/authorize/account.service.js"></script>
+<script src="scripts/authorize/login.controller.js"></script>
+<script src="scripts/authorize/lockscreen.controller.js"></script>
+<script src="scripts/authorize/logout.controller.js"></script>
+<script src="scripts/authorize/register.controller.js"></script>
+
+<script src="scripts/bizs/main.controller.js"></script>
+<script src="scripts/bizs/dashboard.controller.js"></script>
+<script src="scripts/bizs/practice/practice.service.js"></script>
+
+<script src="scripts/bizs/practice/basicinfo/basicinfo.service.js"></script>
+<script src="scripts/bizs/practice/basicinfo/basicinfo.controller.js"></script>
+<script src="scripts/bizs/practice/employees/employees.service.js"></script>
+<script src="scripts/bizs/practice/employees/employees.controller.js"></script>
+<script src="scripts/bizs/patients/patient.service.js"></script>
+<script src="scripts/bizs/patients/patient.problems.service.js"></script>
+<script src="scripts/bizs/patients/patient.medications.service.js"></script>
+<script src="scripts/bizs/patients/patients.controller.js"></script>
+<script src="scripts/bizs/patients/new/newpatient.controller.js"></script>
+<script src="scripts/bizs/patients/details/patient.details.controller.js"></script>
+<script src="scripts/bizs/patients/details/patient.details.profile.controller.js"></script>
+<script src="scripts/bizs/patients/details/patient.details.summary.controller.js"></script>
+<script src="scripts/bizs/patients/details/patient.details.timeline.controller.js"></script>
+<!-- endbuild -->
 </body>
 </html>

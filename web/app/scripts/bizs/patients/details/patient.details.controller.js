@@ -1,4 +1,5 @@
-﻿angular.module('chApp.patients.controllers').controller('PatientDetailsController', [
+﻿'use strict';
+angular.module('chApp.patients.controllers').controller('PatientDetailsController', [
     '$scope','$rootScope', '$q', '$state', '$stateParams', '$location', 'pluginsService', 'tabService', 'patientService', 'applicationService',
     function ($scope, $rootScope, $q, $state, $stateParams, $location, pluginsService, tabService, patientService, applicationService) {
         //加载tab页

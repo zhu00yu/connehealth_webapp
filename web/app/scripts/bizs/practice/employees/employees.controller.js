@@ -1,4 +1,5 @@
-﻿angular.module('chApp.practice.controllers').controller('PracticeEmployeesController',
+﻿'use strict';
+angular.module('chApp.practice.controllers').controller('PracticeEmployeesController',
     ['$scope', '$rootScope', '$state', '$stateParams', '$location', 'tabService', 'employeesService',
     function ($scope, $rootScope, $state, $stateParams, $location, tabService, employeesService) {
         //加载tab页

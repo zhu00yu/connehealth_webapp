@@ -1,4 +1,5 @@
-﻿angular.module('chApp.practice.controllers').controller('PracticeGroupsController', 
+﻿'use strict';
+angular.module('chApp.practice.controllers').controller('PracticeGroupsController',
     ['$scope', '$rootScope', '$state', '$stateParams', '$location', '$timeout', 'tabService', 'groupsService',
     function ($scope, $rootScope, $state, $stateParams, $location, $timeout, tabService, groupsService) {
         //加载tab页

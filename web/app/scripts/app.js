@@ -43,23 +43,23 @@ angular
             url: "/authorize",
             views: {
                 'main': {
-                    templateUrl: "/scripts/authorize/authorize.html"
+                    templateUrl: "/views/authorize/authorize.html"
                 }
             }
         })
         .state("authorize.login", {
             url: "/login",
-            templateUrl: "/scripts/authorize/login.html",
+            templateUrl: "/views/authorize/login.html",
             controller: "LoginController"
         })
         .state("authorize.register", {
             url: "/login",
-            templateUrl: "/scripts/authorize/register.html",
+            templateUrl: "/views/authorize/register.html",
             controller: "RegisterController"
         })
         .state("authorize.lockscreen", {
             url: "/lockscreen",
-            templateUrl: "/scripts/authorize/lockscreen.html",
+            templateUrl: "/views/authorize/lockscreen.html",
             controller: "LockscreenController"
         })
         .state("authorize.logout", {
@@ -71,62 +71,62 @@ angular
             url: "/biz",
             views: {
                 'main': {
-                    templateUrl: "/scripts/bizs/main.html",
+                    templateUrl: "/views/bizs/main.html",
                     controller: "BizMainController"
                 }
             }
         })
         .state("biz.dashboard", {
             url: "/dashboard",
-            templateUrl: "/scripts/bizs/dashboard.html",
+            templateUrl: "/views/bizs/dashboard.html",
             controller: "DashboardController"
         })
         .state("biz.practice", {
             url: "/practice",
-            templateUrl: "/scripts/bizs/practice/main.html"
+            templateUrl: "/views/bizs/practice/main.html"
         })
         .state("biz.practice.basicinfo", {
             url: "/basicinfo/:id",
-            templateUrl: "/scripts/bizs/practice/basicinfo/basicinfo.html",
+            templateUrl: "/views/bizs/practice/basicinfo/basicinfo.html",
             controller: "PracticeBasicinfoController"
         })
         .state("biz.practice.employees", {
             url: "/employees/:id",
-            templateUrl: "/scripts/bizs/practice/employees/employees.html",
+            templateUrl: "/views/bizs/practice/employees/employees.html",
             controller: "PracticeEmployeesController"
         })
         .state("biz.patients", {
             url: "/patients",
-            templateUrl: "/scripts/bizs/patients/main.html"
+            templateUrl: "/views/bizs/patients/main.html"
         })
         .state("biz.patients.list", {
             url: "/patients/list",
-            templateUrl: "/scripts/bizs/patients/patients.html",
+            templateUrl: "/views/bizs/patients/patients.html",
             controller: "PatientsController"
         })
         .state("biz.patients.details", {
             url: "/patients/details/{patientId}",
-            templateUrl: "/scripts/bizs/patients/details/details.html",
+            templateUrl: "/views/bizs/patients/details/details.html",
             controller: "PatientDetailsController"
         })
         .state("biz.patients.details.profile", {
             url: "/profile",
-            templateUrl: "/scripts/bizs/patients/details/details_profile.html",
+            templateUrl: "/views/bizs/patients/details/details_profile.html",
             controller: "PatientDetailsProfileController"
         })
         .state("biz.patients.details.summary", {
             url: "/summary",
-            templateUrl: "/scripts/bizs/patients/details/details_summary.html",
+            templateUrl: "/views/bizs/patients/details/details_summary.html",
             controller: "PatientDetailsSummaryController"
         })
         .state("biz.patients.details.timeline", {
             url: "/timeline",
-            templateUrl: "/scripts/bizs/patients/details/details_timeline.html",
+            templateUrl: "/views/bizs/patients/details/details_timeline.html",
             controller: "PatientDetailsTimeLineController"
         })
         .state("biz.patients.addpatient", {
             url: "/patients/new",
-            templateUrl: "/scripts/bizs/patients/new/new_patient.html",
+            templateUrl: "/views/bizs/patients/new/new_patient.html",
             controller: "NewPatientController"
         })
   })

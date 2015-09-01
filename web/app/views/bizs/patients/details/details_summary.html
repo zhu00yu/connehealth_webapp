@@ -1,0 +1,555 @@
+<div class="row">
+    <div class="col-md-12"></div>
+</div>
+
+<div class="row">
+<div class="col-md-6">
+<div panel-box-directive>
+    <div panel-box-header-directive header-title="疾病列表"></div>
+    <div panel-box-content-directive class="pagination2" style="min-height: 363px;" >
+        <div style="padding-bottom: 30px;">
+            <table class="table dataTable problemList" id="problemListTable">
+                <thead>
+                <tr>
+                    <th class="hide">ProblemData</th>
+
+                    <th>&nbsp;</th>
+                    <th>疾病</th>
+                    <th>状态</th>
+                    <th>患病日期</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade insertProblemModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h4 class="modal-title"><strong>添加</strong> 疾病</h4>
+            </div>
+            <div class="modal-body" style="max-height: 380px; overflow: auto;">
+                <form role="form">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>疾病检索</label>
+                                <div>
+                                    <input type="text" ng-model="dto.problem.diseaseId" class="icdSearch form-control form-white">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>ICD 代码</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="dto.medication.icdNo" class="form-control form-white" placeholder="ICD">
+                                    <i class="icon-lock"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>疾病名称</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="dto.problem.problemName" class="form-control form-white" placeholder="名称">
+                                    <i class="icon-lock"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>疾病状态</label>
+                                <div class="prepend-icon">
+                                    <select select2-directive ng-model="dto.problem.currentStatus" init-value="{{dto.problem.currentStatus}}" class="form-control form-white" data-placeholder="疾病状态">
+                                        <option>治疗中</option>
+                                        <option>已治愈</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>严重程度</label>
+                                <div>
+                                    <select select2-directive ng-model="dto.problem.severity" init-value="{{dto.problem.severity}}" class="form-control form-white" data-placeholder="严重程度">
+                                        <option>急性</option>
+                                        <option>慢性</option>
+                                        <option>晚期</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label">患病日期</label>
+                                <div class="input-daterange b-datepicker input-group">
+                                    <input type="text" class="input-sm form-control"  ng-model="dto.problem.startDate" placeholder="发病日">
+                                    <span class="input-group-addon">到</span>
+                                    <input type="text" class="input-sm form-control"  ng-model="dto.problem.endDate" placeholder="治愈日">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>备注</label>
+                                <div class="prepend-icon">
+                                    <textarea ng-model="dto.problem.memo" class="form-control form-white" placeholder="备注"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary btn-embossed" ng-click="submitProblemEditor(true)">添加</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade editProblemModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h4 class="modal-title"><strong>修改</strong> 疾病</h4>
+            </div>
+            <div class="modal-body" style="max-height: 380px; overflow: auto;">
+                <form role="form">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>疾病检索</label>
+                                <div>
+                                    <input type="text" ng-model="dto.problem.diseaseId" class="icdSearch form-control form-white">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>ICD 代码</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="dto.problem.icdNo" class="form-control form-white" placeholder="ICD">
+                                    <i class="icon-lock"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>疾病名称</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="dto.problem.problemName" class="form-control form-white" placeholder="名称">
+                                    <i class="icon-lock"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>疾病状态</label>
+                                <div class="prepend-icon">
+                                    <select select2-directive ng-model="dto.problem.currentStatus" init-value="{{dto.problem.currentStatus}}" class="form-control form-white" data-placeholder="疾病状态">
+                                        <option>治疗中</option>
+                                        <option>已治愈</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>严重程度</label>
+                                <div>
+                                    <select select2-directive ng-model="dto.problem.severity" init-value="{{dto.problem.severity}}" class="form-control form-white" data-placeholder="严重程度">
+                                        <option>急性</option>
+                                        <option>慢性</option>
+                                        <option>晚期</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label">患病日期</label>
+                                <div class="input-daterange b-datepicker input-group">
+                                    <input type="text" class="input-sm form-control"  ng-model="dto.problem.startDate" placeholder="发病日">
+                                    <span class="input-group-addon">到</span>
+                                    <input type="text" class="input-sm form-control"  ng-model="dto.problem.endDate" placeholder="治愈日">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>备注</label>
+                                <div class="prepend-icon">
+                                    <textarea ng-model="dto.problem.memo" class="form-control form-white" placeholder="备注"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary btn-embossed" ng-click="submitProblemEditor()">修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+<div class="col-md-6">
+<div panel-box-directive>
+    <div panel-box-header-directive header-title="药品清单"></div>
+    <div panel-box-content-directive class="pagination2" style="min-height: 363px;" >
+        <div style="padding-bottom: 30px;">
+            <table class="table dataTable medicationList" id="medicationListTable">
+                <thead>
+                <tr>
+                    <th class="hide">MedicationData</th>
+
+                    <th>&nbsp;</th>
+                    <th>药品</th>
+                    <th>状态</th>
+                    <th>用药时间</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade insertMedicationModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h4 class="modal-title"><strong>添加</strong> 药品</h4>
+            </div>
+            <div class="modal-body" style="max-height: 380px; overflow: auto;">
+                <form role="form">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>药品检索</label>
+                                <div>
+                                    <input type="text" ng-model="dto.medication.drugId" class="drugSearch form-control form-white">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>通用名</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="dto.medication.drugName" class="form-control form-white" placeholder="ICD">
+                                    <i class="icon-lock"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>处方药</label>
+                                <div class="input-group">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="dto.medication.otc" ng-model="dto.medication.otc" value=1> 非处方药
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="dto.medication.otc" ng-model="dto.medication.otc" value=0> 处方药
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>剂型</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="dto.medication.form" class="form-control form-white" placeholder="剂型">
+                                    <i class="icon-lock"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>剂量</label>
+                                <div class="input-group">
+                                    <input type="text" ng-model="dto.medication.strength" class="form-control form-white" placeholder="剂量">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{dto.medication.strengthUnit}} <span class="caret"></span></button>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a ng-click="dto.medication.strengthUnit='mg'">mg</a></li>
+                                            <li><a ng-click="dto.medication.strengthUnit='ml'">ml</a></li>
+                                            <li><a ng-click="dto.medication.strengthUnit='g'">g</a></li>
+                                            <li><a ng-click="dto.medication.strengthUnit='l'">l</a></li>
+                                        </ul>
+                                    </div><!-- /btn-group -->
+                                </div><!-- /input-group -->
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>用药频率</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="dto.medication.frequency" class="form-control form-white" placeholder="用药频率">
+                                    <i class="icon-lock"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>状态</label>
+                                <div class="prepend-icon">
+                                    <select select2-directive ng-model="dto.medication.currentStatus" init-value="{{dto.medication.currentStatus}}" class="form-control form-white" data-placeholder="疾病状态">
+                                        <option>服用中</option>
+                                        <option>停用</option>
+                                        <option>暂停</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" ng-hide="dto.medication.currentStatus=='服用中'">
+                            <div class="form-group">
+                                <label>停药原因</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="dto.medication.stopReason" class="form-control form-white" placeholder="停药原因">
+                                    <i class="icon-lock"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label">用药日期</label>
+                                <div class="input-daterange b-datepicker input-group">
+                                    <input type="text" class="input-sm form-control"  ng-model="dto.medication.startDate" placeholder="开始日期">
+                                    <span class="input-group-addon">到</span>
+                                    <input type="text" class="input-sm form-control"  ng-model="dto.medication.endDate" placeholder="停药日期">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>疾病检索</label>
+                                <div>
+                                    <input type="text" ng-model="dto.medication.diseaseId" class="icdSearch form-control form-white">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>用药原因</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="dto.medication.problemName" class="form-control form-white" placeholder="用药原因">
+                                    <i class="icon-lock"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>备注</label>
+                                <div class="prepend-icon">
+                                    <textarea ng-model="dto.medication.memo" class="form-control form-white" placeholder="备注"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary btn-embossed" ng-click="submitMedicationEditor(true)">添加</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade editMedicationModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                <h4 class="modal-title"><strong>修改</strong> 药品</h4>
+            </div>
+            <div class="modal-body" style="max-height: 380px; overflow: auto;">
+                <form role="form">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>药品检索</label>
+                                <div>
+                                    <input type="text" ng-model="dto.medication.drugId" class="drugSearch form-control form-white">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>通用名</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="dto.medication.drugName" class="form-control form-white" placeholder="ICD">
+                                    <i class="icon-lock"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>处方药</label>
+                                <div class="input-group">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="dto.medication.otc" ng-model="dto.medication.otc" value=1> 非处方药
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="dto.medication.otc" ng-model="dto.medication.otc" value=0> 处方药
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>剂型</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="dto.medication.form" class="form-control form-white" placeholder="剂型">
+                                    <i class="icon-lock"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>剂量</label>
+                                <div class="input-group">
+                                    <input type="text" ng-model="dto.medication.strength" class="form-control form-white" placeholder="剂型">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">单位 <span class="caret"></span></button>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><span>mg</span></li>
+                                            <li><span>ml</span></li>
+                                            <li><span>g</span></li>
+                                            <li><span>l</span></li>
+                                        </ul>
+                                    </div><!-- /btn-group -->
+                                </div><!-- /input-group -->
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>用药频率</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="dto.medication.frequency" class="form-control form-white" placeholder="用药频率">
+                                    <i class="icon-lock"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>状态</label>
+                                <div class="prepend-icon">
+                                    <select select2-directive ng-model="dto.medication.currentStatus" init-value="{{dto.medication.currentStatus}}" class="form-control form-white" data-placeholder="疾病状态">
+                                        <option>服用中</option>
+                                        <option>停用</option>
+                                        <option>暂停</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" ng-hide="dto.medication.currentStatus=='服用中'">
+                            <div class="form-group">
+                                <label>停药原因</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="dto.medication.stopReason" class="form-control form-white" placeholder="停药原因">
+                                    <i class="icon-lock"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-label">用药日期</label>
+                                <div class="input-daterange b-datepicker input-group">
+                                    <input type="text" class="input-sm form-control"  ng-model="dto.medication.startDate" placeholder="开始日期">
+                                    <span class="input-group-addon">到</span>
+                                    <input type="text" class="input-sm form-control"  ng-model="dto.medication.endDate" placeholder="停药日期">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>疾病检索</label>
+                                <div>
+                                    <input type="text" ng-model="dto.medication.diseaseId" class="icdSearch form-control form-white">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>用药原因</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="dto.medication.problemName" class="form-control form-white" placeholder="用药原因">
+                                    <i class="icon-lock"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>备注</label>
+                                <div class="prepend-icon">
+                                    <textarea ng-model="dto.medication.memo" class="form-control form-white" placeholder="备注"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary btn-embossed" ng-click="submitMedicationEditor()">修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</div>
+</div>

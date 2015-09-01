@@ -1,0 +1,37 @@
+﻿<div>
+    <form class="form-signin" role="form">
+        <h3><strong>登录</strong> 到您的账户</h3>
+        <div class="append-icon">
+            <input type="text" name="name" id="name" ng-model="name" class="form-control form-white username" placeholder="用户名" required>
+            <i class="icon-user"></i>
+        </div>
+        <div class="append-icon m-b-20">
+            <input type="password" name="password" ng-model="password" class="form-control form-white password" placeholder="密码" required>
+            <i class="icon-lock"></i>
+        </div>
+        <div class="append-icon m-b-20">
+            <select select2-directive name="practiceId" ng-model="practiceId" class="form-control form-white" data-placeholder="诊所">
+                <option></option><option ng-repeat="opt in practices" value="{{opt[0]}}">{{opt[1]}}</option>
+            </select>
+        </div>
+        <button type="submit" id="submit-form" ng-click="loginUser()" class="btn btn-lg btn-dark btn-rounded ladda-button" data-style="expand-left">登录</button>
+        <span class="forgot-password"><a id="password" href="#" ng-click="forgotPasswordForm($event)">忘记了密码?</a></span>
+        <div class="form-footer">
+            <div class="social-btn">
+                <button type="button" class="btn btn-lg btn-block btn-blue btn-square" ui-sref="authorize.register({type: 'provider'})"><i class="fa fa-user-md pull-left"></i>注册成为医生</button>
+            </div>
+        </div>
+    </form>
+    <form class="form-password" role="form">
+        <h3><strong>重置</strong> 您的密码</h3>
+        <div class="append-icon m-b-20">
+            <input type="text" name="password" class="form-control form-white username" placeholder="新密码" required>
+            <i class="fa fa-at"></i>
+        </div>
+        <button type="submit" id="submit-password" class="btn btn-lg btn-danger btn-block ladda-button" data-style="expand-left">获取激活码</button>
+        <div class="clearfix m-t-60">
+            <p class="pull-left m-t-20 m-b-0"><a id="login" href="#" ng-click="loginForm($event)">用其他账户登录</a></p>
+            <p class="pull-right m-t-20 m-b-0"><a href="#" ui-sref="authorize.register({type: 'provider'})">注册新账户</a></p>
+        </div>
+    </form>
+</div>

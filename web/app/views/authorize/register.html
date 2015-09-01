@@ -1,0 +1,156 @@
+﻿<div>
+    <style>
+        .form-signup .select2-container.form-control, .form-signup textarea.form-control{margin-bottom:8px;}
+    </style>
+    <form class="form-signup" role="form">
+        <tabset class="tab-fade-in">
+            <tab active>
+                <tab-heading>
+                    账户信息
+                </tab-heading>
+                <div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="append-icon">
+                                <input type="text" ng-model="userDto.familyName" class="form-control form-white firstname" placeholder="姓" required autofocus>
+                                <i class="icon-user"></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="append-icon">
+                                <input type="text" ng-model="userDto.givenName" class="form-control form-white lastname" placeholder="名" required>
+                                <i class="icon-user"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="append-icon">
+                        <input type="email" ng-model="userDto.email" class="form-control form-white email" placeholder="Email" required>
+                        <i class="icon-envelope"></i>
+                    </div>
+                    <div class="append-icon">
+                        <input type="text" ng-model="userDto.userName" class="form-control form-white username" placeholder="账户名" required>
+                        <i class="icon-lock"></i>
+                    </div>
+                    <div class="append-icon m-b-10">
+                        <input type="password" ng-model="userDto.password" class="form-control form-white password" placeholder="密码" required>
+                        <i class="icon-lock"></i>
+                    </div>
+                    <div class="append-icon">
+                        <input type="password" ng-model="password2" class="form-control form-white password2" placeholder="密码确认" required>
+                        <i class="icon-lock"></i>
+                    </div>
+                </div>
+            </tab>
+            <tab>
+                <tab-heading>
+                    个人信息
+                </tab-heading>
+                <div>
+                    <div class="append-icon">
+                        <input type="text" ng-model="userDto.mobile" class="form-control form-white phone" placeholder="手机号码" required>
+                        <i class="icon-envelope"></i>
+                    </div>
+<!--
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="append-icon">
+                                <input type="text" name="captcha" id="captcha" class="form-control form-white" placeholder="手机验证码" required autofocus>
+                                <i class="icon-user"></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="append-icon">
+                                <button type="button" class="btn btn-sm btn-primary">免费获取验证码</button>
+                            </div>
+                        </div>
+                    </div>
+-->
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="append-icon">
+                                <select select2-directive ng-model="userDto.sex" class="form-control form-white" data-placeholder="性别">
+                                    <option selected="selected">男</option>
+                                    <option>女</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="append-icon">
+                                <input type="text" ng-model="userDto.dob" class="form-control form-white" placeholder="出生日期" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="append-icon">
+                        <input type="text" ng-model="userDto.idNo" class="form-control form-white" placeholder="身份证号码" required>
+                    </div>
+
+                </div>
+            </tab>
+            <tab>
+                <tab-heading>
+                    执业信息
+                </tab-heading>
+                <div>
+                    <div class="append-icon">
+                        <input type="text" ng-model="userDto.certificateNo" class="form-control form-white" placeholder="医生资格证书编码" required>
+                    </div>
+                    <div class="append-icon">
+                        <input type="text" ng-model="userDto.practiceNo" class="form-control form-white" placeholder="医生执业证书编码" required>
+                    </div>
+                    <div class="append-icon">
+                        <div citylist-directive location="userDto.practiceLocation" placeholder="执业地区"></div>
+                    </div>
+                    <div class="append-icon">
+                        <input type="text" ng-model="userDto.primaryPracticeName" class="form-control form-white" placeholder="第一执业机构" required>
+                    </div>
+                    <div class="append-icon">
+                        <select select2-directive ng-model="userDto.professionalRank" class="form-control form-white" data-placeholder="职称">
+                            <option></option>
+                            <option selected="selected">住院医师</option>
+                            <option>主治医师</option>
+                            <option>副主任医师</option>
+                            <option>主任医师</option>
+                        </select>
+                    </div>
+                    <div class="append-icon">
+                        <div specialist-directive specialties="userDto.specialties" placeholder="医师专科"></div>
+                    </div>
+                    <div class="append-icon">
+                        <textarea ng-model="userDto.skills" class="form-control form-white" placeholder="专业技能" required></textarea>
+                    </div>
+                    <div class="append-icon m-b-20">
+                        <select select2-directive ng-model="userDto.practiceId" class="form-control form-white" data-placeholder="挂靠诊所">
+                            <option></option><option ng-repeat="opt in practices" value="{{opt[0]}}">{{opt[1]}}</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="terms option-group">
+                            <label for="terms" class="m-t-10">
+                                <input type="checkbox" name="isAgreeTerm" ng-model="isAgreeTerm" data-checkbox="icheckbox_square-blue" required/>
+                                我同意条款
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="m-t-10">
+                            <button type="button" ng-click="registerUser()" class="btn btn-lg btn-dark btn-rounded" style="margin: 0" data-style="expand-left">注册</button>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+        </tabset>
+
+    </form>
+    <div class="form-footer">
+        <div class="clearfix">
+            <p class="new-here">
+                <a ui-sref="authorize.login">用已有账户登录</a>
+            </p>
+        </div>
+    </div>
+</div>
+

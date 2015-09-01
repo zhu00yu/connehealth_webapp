@@ -17,7 +17,7 @@ angular.module('chApp.common.directives').directive('select2Directive', ['$timeo
                 }
 
                 var placeholder = $(elem).data('placeholder') || $(elem).prop('placeholder') || '';
-                $(elem).select2("destroy");
+                //$(elem).select2("destroy");
                 var selector = $(elem).select2({
                     formatResult: format,
                     formatSelection: format,

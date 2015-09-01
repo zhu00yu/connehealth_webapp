@@ -1,4 +1,5 @@
-﻿Date.prototype.format = function (fmt) {
+﻿'use strict';
+Date.prototype.format = function (fmt) {
     var o = {
         "M+": this.getMonth() + 1, //月份         
         "d+": this.getDate(), //日         

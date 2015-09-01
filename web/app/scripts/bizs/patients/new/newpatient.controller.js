@@ -1,4 +1,5 @@
-﻿angular.module('chApp.patients.controllers').controller('NewPatientController', [
+﻿'use strict';
+angular.module('chApp.patients.controllers').controller('NewPatientController', [
     '$scope','$rootScope', '$q', '$state', '$stateParams', '$location', '$timeout', 'pluginsService', 'tabService', 'patientService', 'applicationService',
     function ($scope, $rootScope, $q, $state, $stateParams, $location, $timeout, pluginsService, tabService, patientService, applicationService) {
 

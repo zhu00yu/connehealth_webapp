@@ -318,7 +318,7 @@ angular.module('chApp.services').factory('pluginsService', [function () {
                 var opt = {};
                 // Tools: export to Excel, CSV, PDF & Print
                 if ($(this).hasClass('table-tools')) {
-                    opt.sDom = "<'row'<'col-md-6'f><'col-md-6'T>r>t<'row'<'col-md-6'i><'spcol-md-6an6'p>>",
+                    opt.sDom = "<'row'<'col-md-6'f><'col-md-6'T>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
                     opt.oTableTools = {
                         "sSwfPath": "../../../assets/global/plugins/datatables/swf/copy_csv_xls_pdf.swf",
                         "aButtons": ["csv", "xls", "pdf", "print"]

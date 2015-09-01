@@ -244,8 +244,8 @@ angular.module('chApp.patients.services').factory('patientService', ['$http', '$
 
         /*  Initialse DataTables, with no sorting on the 'details' column  */
         oTable = oTable.dataTable({
-            "dom": "<'toolbar' T>frt<'row'<'col-md-6'i><'spcol-md-6an6'p>>",
-            //"dom": "<'row'<'col-md-12'f <'toolbar' T>>>t<'row'<'col-md-6'i><'spcol-md-6an6'p>>",
+            "dom": "<'toolbar' T>frt<'row'<'col-md-6'i><'col-md-6'p>>",
+            //"dom": "<'row'<'col-md-12'f <'toolbar' T>>>t<'row'<'col-md-6'i><'col-md-6'p>>",
             "order": oOrderSetting,
             "tableTools": oTableTools,
             "columnDefs": oColumnSetting,

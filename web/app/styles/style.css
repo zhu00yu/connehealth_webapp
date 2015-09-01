@@ -20,15 +20,6 @@
 /******* THEMES *******/
 /* Mixin */
 /* MANDATORY CSS */
-@import "icons/font-awesome/font-awesome.css";
-@import "icons/line-icons/line-icons.css";
-@import "icons/line-icons/simple-line-icons.css";
-@import "icons/rounded/style.css";
-/* Rounded Icons - See Icons Page - OPTIONAL */
-@import "icons/octicons/octicons.css";
-/* Topbar Left Icons - OPTIONAL */
-@import "icons/weather/css/weather-icons.min.css";
-/* Weather Icons - See Icons Page - OPTIONAL */
 /* FONTS */
 @font-face {
   font-family: 'weather';
@@ -12445,6 +12436,9 @@ blockquote i {
 .checkbox input[type="checkbox"],
 .checkbox-inline input[type="checkbox"] {
   margin-right: -20px;
+}
+.radio-inline input[type="radio"] {
+  margin-left: -40px;
 }
 .rtl .radio input[type="radio"],
 .rtl .radio-inline input[type="radio"],

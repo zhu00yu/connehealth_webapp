@@ -10,7 +10,7 @@ angular.module('chApp.common.services').factory('locationsService', ["$http", "$
 
     function _loadLocations(callback) {
         if (_locations.length === 0) {
-            $http.get("/scripts/common/data/locations.json.html").success(function (data) {
+            $http.get("/data/locations.json.html").success(function (data) {
                 _locations = data["RECORDS"];
 
                 _.each(_locations, function(loc) {
