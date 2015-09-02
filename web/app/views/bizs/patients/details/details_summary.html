@@ -552,4 +552,254 @@
 
 
 </div>
+
+<div class="row">
+    <div class="col-md-6">
+    <div panel-box-directive>
+        <div panel-box-header-directive header-title="过敏清单"></div>
+        <div panel-box-content-directive class="pagination2" style="min-height: 363px;" >
+            <div style="padding-bottom: 30px;">
+                <table class="table dataTable allergyList" id="allergyListTable">
+                    <thead>
+                    <tr>
+                        <th class="hide">AllergyData</th>
+
+                        <th>&nbsp;</th>
+                        <th>分类</th>
+                        <th>过敏原</th>
+                        <th>状态</th>
+                        <th>严重程度</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade insertAllergyModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                    <h4 class="modal-title"><strong>添加</strong> 过敏</h4>
+                </div>
+                <div class="modal-body" style="max-height: 380px; overflow: auto;">
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>过敏原检索</label>
+                                    <div>
+                                        <input type="text" ng-model="dto.allergy.allergenId" class="allergenSearch form-control form-white">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>过敏原</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.allergy.allergenName" class="form-control form-white" placeholder="ICD">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>过敏原类别</label>
+                                    <div class="prepend-icon">
+                                        <select select2-directive ng-model="dto.allergy.allergenType" init-value="{{dto.allergy.allergenType}}" class="allergenType form-control form-white" placeholder="过敏原类别">                                            <option>药品</option>
+                                            <option>药品</option>
+                                            <option>食物</option>
+                                            <option>环境</option>
+                                            <option>其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>发现时间</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.allergy.startDate" class="form-control form-white" placeholder="日期">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>过敏时期</label>
+                                    <div class="prepend-icon">
+                                        <select select2-directive ng-model="dto.allergy.stage" init-value="{{dto.allergy.stage}}" class="form-control form-white" data-placeholder="疾病状态">
+                                            <option>婴儿期</option>
+                                            <option>童年</option>
+                                            <option>成年</option>
+                                            <option>未知</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>状态</label>
+                                    <div class="prepend-icon">
+                                        <select select2-directive ng-model="dto.allergy.currentStatus" init-value="{{dto.allergy.currentStatus}}" class="form-control form-white" data-placeholder="疾病状态">
+                                            <option>仍然过敏</option>
+                                            <option>不过敏</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>过敏反应</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.reactions" class="reactionSearch form-control form-white">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>备注</label>
+                                    <div class="prepend-icon">
+                                        <textarea ng-model="dto.allergy.memo" class="form-control form-white" placeholder="备注"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary btn-embossed" ng-click="submitAllergyEditor(true)">添加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade editAllergyModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                    <h4 class="modal-title"><strong>修改</strong> 过敏</h4>
+                </div>
+                <div class="modal-body" style="max-height: 380px; overflow: auto;">
+                    <form role="form">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>过敏原检索</label>
+                                    <div>
+                                        <input type="text" ng-model="dto.allergy.allergenId" class="allergenSearch form-control form-white">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>过敏原</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.allergy.allergenName" class="form-control form-white" placeholder="ICD">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>过敏原类别</label>
+                                    <div class="prepend-icon">
+                                        <select select2-directive ng-model="dto.allergy.allergenType" init-value="{{dto.allergy.allergenType}}" class="allergenType form-control form-white" placeholder="过敏原类别">
+                                            <option>药品</option>
+                                            <option>食物</option>
+                                            <option>环境</option>
+                                            <option>其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>发现时间</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.allergy.startDate" class="form-control form-white" placeholder="日期">
+                                        <i class="icon-lock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>过敏时期</label>
+                                    <div class="prepend-icon">
+                                        <select select2-directive ng-model="dto.allergy.stage" init-value="{{dto.allergy.stage}}" class="form-control form-white" data-placeholder="疾病状态">
+                                            <option>婴儿期</option>
+                                            <option>童年</option>
+                                            <option>成年</option>
+                                            <option>未知</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>状态</label>
+                                    <div class="prepend-icon">
+                                        <select select2-directive ng-model="dto.allergy.currentStatus" init-value="{{dto.allergy.currentStatus}}" class="form-control form-white" data-placeholder="疾病状态">
+                                            <option>仍然过敏</option>
+                                            <option>不过敏</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>过敏反应</label>
+                                    <div class="prepend-icon">
+                                        <input type="text" ng-model="dto.reactions" class="reactionSearch form-control form-white">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>备注</label>
+                                    <div class="prepend-icon">
+                                        <textarea ng-model="dto.allergy.memo" class="form-control form-white" placeholder="备注"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary btn-embossed" ng-click="submitAllergyEditor()">修改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <div class="col-md-6">
+
+    </div>
+</div>
 </div>

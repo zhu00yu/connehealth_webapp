@@ -1,7 +1,7 @@
 ﻿'use strict';
 angular.module('chApp.patients.controllers').controller('PatientDetailsSummaryController', [
-    '$scope','$rootScope', '$q', '$state', '$stateParams', '$location', 'pluginsService', 'tabService', 'patientService', 'patientProblemsService', 'patientMedicationsService',
-    function ($scope, $rootScope, $q, $state, $stateParams, $location, pluginsService, tabService, patientService, patientProblemsService, patientMedicationsService) {
+    '$scope','$rootScope', '$q', '$state', '$stateParams', '$location', 'pluginsService', 'tabService', 'patientService', 'patientProblemsService', 'patientMedicationsService', 'patientAllergiesService',
+    function ($scope, $rootScope, $q, $state, $stateParams, $location, pluginsService, tabService, patientService, patientProblemsService, patientMedicationsService, patientAllergiesService) {
         var element = tabService.getTabPanel();
         var oElements = {};
 
@@ -12,6 +12,9 @@ angular.module('chApp.patients.controllers').controller('PatientDetailsSummaryCo
 
         $scope.dto.medication = {};
         $scope.dto.medications = [];
+
+        $scope.dto.allergy = {};
+        $scope.dto.allergies = [];
 
         (function initProblems (){
             function getProblems(patientId){
@@ -125,6 +128,72 @@ angular.module('chApp.patients.controllers').controller('PatientDetailsSummaryCo
                     patientMedicationsService.updateMedication(patientId, medication).then(function (result) {
                         getMedications(patientId);
                         patientMedicationsService.closeModals();
+                    }, function (result) {
+                        console.log(arguments);
+                    });
+                }
+            }
+
+        })();
+
+        (function initAllergies (){
+            function getAllergies(patientId){
+                patientAllergiesService.getAllergies(patientId).then(function (data) {
+                    $scope.dto.allergies = data;
+                    return data;
+                });
+            }
+
+            $scope.$watch("patientId", function(newValue, oldValue){
+                if (newValue){
+                    getAllergies(newValue);
+                    oElements = patientAllergiesService.initWidgets(newValue, element, null, null, null,
+                        function (allergy) {
+                            $scope.dto.allergy = allergy;
+                            patientAllergiesService.initAllergenSelectorValue({id:allergy.allergenId, name:allergy.allergenName});
+                            patientAllergiesService.initReactionSelectorValue(allergy.reactions);
+                            if (!$scope.$$phase) {
+                                $scope.$apply();
+                            }
+                        },
+                        function(allergen){
+                            $scope.dto.allergy.allergenId = allergen.id;
+                            $scope.dto.allergy.allergenType = allergen.type;
+                            $scope.dto.allergy.allergenName = allergen.name;
+                        },
+                        function(data){
+                            var reactions = [];
+                            _.each(data, function(r){
+                                reactions.push({adverseReactionId: r.id, reaction: r.text});
+                            });
+                            $scope.dto.allergy.reactions = reactions;
+                        }
+                    );
+                }
+            });
+
+            $scope.$watch("dto.allergies", function (newValue, oldValue) {
+                if (newValue) {
+                }
+                patientAllergiesService.reloadDatas(newValue);
+            });
+
+            $scope.submitAllergyEditor = function(isNew) {
+                var patientId = $scope.patientId;
+                var allergy = $scope.dto.allergy;
+
+                if (isNew) {
+                    allergy.patientId = patientId;
+                    patientAllergiesService.insertAllergy(patientId, allergy).then(function (result) {
+                        getAllergies(patientId);
+                        patientAllergiesService.closeModals();
+                    }, function (result) {
+                        console.log(arguments);
+                    });
+                } else {
+                    patientAllergiesService.updateAllergy(patientId, allergy).then(function (result) {
+                        getAllergies(patientId);
+                        patientAllergiesService.closeModals();
                     }, function (result) {
                         console.log(arguments);
                     });

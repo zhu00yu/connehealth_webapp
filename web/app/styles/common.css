@@ -42,3 +42,7 @@
 }
 /*结束设置主内容区域的样式*/
 
+
+.form-control.select2-container .select2-choices{
+    border: 1px solid #ecedee !important;
+}
