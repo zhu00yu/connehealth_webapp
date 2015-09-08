@@ -97,8 +97,8 @@ angular.module('chApp.patients.services').factory('patientService', ['$http', '$
         return promise;
     };
 
-    service.getPatientFile = function(patientId){
-        var promise = $http.get(appConfig.API_HOST + "/patient-files/" + patientId);
+    service.getPatientFile = function(fileId){
+        var promise = $http.get(appConfig.API_HOST + "/patient-files/" + fileId);
         return promise;
     };
 

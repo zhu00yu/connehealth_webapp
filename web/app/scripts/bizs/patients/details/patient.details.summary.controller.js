@@ -1,7 +1,9 @@
 ﻿'use strict';
 angular.module('chApp.patients.controllers').controller('PatientDetailsSummaryController', [
-    '$scope','$rootScope', '$q', '$state', '$stateParams', '$location', 'pluginsService', 'tabService', 'patientService', 'patientProblemsService', 'patientMedicationsService', 'patientAllergiesService',
-    function ($scope, $rootScope, $q, $state, $stateParams, $location, pluginsService, tabService, patientService, patientProblemsService, patientMedicationsService, patientAllergiesService) {
+    '$scope','$rootScope', '$q', '$state', '$stateParams', '$location', 'pluginsService', 'tabService',
+    'patientService', 'patientProblemsService', 'patientMedicationsService', 'patientAllergiesService', 'patientMedicalHistoriesService', 'patientVaccinesService',
+    function ($scope, $rootScope, $q, $state, $stateParams, $location, pluginsService, tabService,
+              patientService, patientProblemsService, patientMedicationsService, patientAllergiesService, patientMedicalHistoriesService, patientVaccinesService) {
         var element = tabService.getTabPanel();
         var oElements = {};
 
@@ -15,6 +17,13 @@ angular.module('chApp.patients.controllers').controller('PatientDetailsSummaryCo
 
         $scope.dto.allergy = {};
         $scope.dto.allergies = [];
+
+        $scope.dto.medicalHistory = {};
+        $scope.dto.medicalHistories = [];
+        $scope.dto.dischargeSummary = {};
+
+        $scope.dto.vaccine = {};
+        $scope.dto.vaccines = [];
 
         (function initProblems (){
             function getProblems(patientId){
@@ -201,5 +210,140 @@ angular.module('chApp.patients.controllers').controller('PatientDetailsSummaryCo
             }
 
         })();
+
+        (function initMedicalHistories (){
+            function getMedicalHistories(patientId){
+                patientMedicalHistoriesService.getMedicalHistories(patientId).then(function (data) {
+                    $scope.dto.medicalHistories = data;
+                    return data;
+                });
+            }
+
+            $scope.$watch("patientId", function(newValue, oldValue){
+                if (newValue){
+                    getMedicalHistories(newValue);
+                    oElements = patientMedicalHistoriesService.initWidgets(newValue, element, null, null, null,
+                        function (history) {
+                            var fileId = history.dischargeSummaryFileId;
+                            var url = patientMedicalHistoriesService.getDischargeSummaryFileUrl(fileId);
+                            $scope.dto.medicalHistory = history;
+                            $scope.dto.dischargeSummary = {
+                                dischargeSummaryFileId: fileId,
+                                dischargeSummaryFileUrl: url
+                            };
+
+                            if (!$scope.$$phase) {
+                                $scope.$apply();
+                            }
+                        },
+                        function(disease){
+                        }
+                    );
+                }
+            });
+
+            $scope.$watch("dto.medicalHistories", function (newValue, oldValue) {
+                if (newValue) {
+                }
+                patientMedicalHistoriesService.reloadDatas(newValue);
+            });
+
+            $scope.submitMedicalHistoryEditor = function(isNew) {
+                var patientId = $scope.patientId;
+                var history = $scope.dto.medicalHistory;
+
+                var file = $scope.dto.dischargeSummary;
+                var historyFileId = file.dischargeSummaryFileId;
+                var historyFileData = file.dischargeSummaryFileData;
+                var historyFileName = file.dischargeSummaryFileName || "DISCHARGE_SUMMARY.pdf";
+
+                var promises = [];
+                if (historyFileData) {
+                    var promise = patientService.uploadPatientFile(historyFileId, historyFileName, historyFileData).then(function(result) {
+                        file.dischargeSummaryFileId = +result.data;
+                        history.dischargeSummaryFileId = +result.data;
+                    }, function(result) {
+                        console.log(arguments);
+                        promise.reject(result.data);
+                    });
+                    promises.push(promise);
+                }
+                $q.all(promises).then(function(){
+                    if (isNew) {
+                        history.patientId = patientId;
+                        patientMedicalHistoriesService.insertMedicalHistory(patientId, history).then(function (result) {
+                            getMedicalHistories(patientId);
+                            patientMedicalHistoriesService.closeModals();
+                        }, function (result) {
+                            console.log(arguments);
+                        });
+                    } else {
+                        patientMedicalHistoriesService.updateMedicalHistory(patientId, history).then(function (result) {
+                            getMedicalHistories(patientId);
+                            patientMedicalHistoriesService.closeModals();
+                        }, function (result) {
+                            console.log(arguments);
+                        });
+                    }
+                });
+            }
+
+        })();
+
+        (function initVaccines (){
+            function getVaccines(patientId){
+                patientVaccinesService.getVaccines(patientId).then(function (data) {
+                    $scope.dto.vaccines = data;
+                    return data;
+                });
+            }
+
+            $scope.$watch("patientId", function(newValue, oldValue){
+                if (newValue){
+                    getVaccines(newValue);
+                    oElements = patientVaccinesService.initWidgets(newValue, element, null, null, null,
+                        function (vaccine) {
+                            $scope.dto.vaccine = vaccine;
+                            if (!$scope.$$phase) {
+                                $scope.$apply();
+                            }
+                        },
+                        function(vaccine){
+                            $scope.dto.vaccine.vaccineId = vaccine.id;
+                            $scope.dto.vaccine.vaccineName = vaccine.fullName;
+                        }
+                    );
+                }
+            });
+
+            $scope.$watch("dto.vaccines", function (newValue, oldValue) {
+                if (newValue) {
+                }
+                patientVaccinesService.reloadDatas(newValue);
+            });
+
+            $scope.submitVaccineEditor = function(isNew) {
+                var patientId = $scope.patientId;
+                var vaccine = $scope.dto.vaccine;
+                if (isNew) {
+                    vaccine.patientId = patientId;
+                    patientVaccinesService.insertVaccine(patientId, vaccine).then(function (result) {
+                        getVaccines(patientId);
+                        patientVaccinesService.closeModals();
+                    }, function (result) {
+                        console.log(arguments);
+                    });
+                } else {
+                    patientVaccinesService.updateVaccine(patientId, vaccine).then(function (result) {
+                        getVaccines(patientId);
+                        patientVaccinesService.closeModals();
+                    }, function (result) {
+                        console.log(arguments);
+                    });
+                }
+            }
+
+        })();
+
     }
 ]);
