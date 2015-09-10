@@ -1,9 +1,9 @@
 ﻿'use strict';
 angular.module('chApp.patients.controllers').controller('PatientDetailsSummaryController', [
     '$scope','$rootScope', '$q', '$state', '$stateParams', '$location', 'pluginsService', 'tabService',
-    'patientService', 'patientProblemsService', 'patientMedicationsService', 'patientAllergiesService', 'patientMedicalHistoriesService', 'patientVaccinesService',
+    'patientService', 'patientProblemsService', 'patientMedicationsService', 'patientAllergiesService', 'patientMedicalHistoriesService', 'patientVaccinesService', 'patientSocialHistoriesService',
     function ($scope, $rootScope, $q, $state, $stateParams, $location, pluginsService, tabService,
-              patientService, patientProblemsService, patientMedicationsService, patientAllergiesService, patientMedicalHistoriesService, patientVaccinesService) {
+              patientService, patientProblemsService, patientMedicationsService, patientAllergiesService, patientMedicalHistoriesService, patientVaccinesService, patientSocialHistoriesService) {
         var element = tabService.getTabPanel();
         var oElements = {};
 
@@ -24,6 +24,8 @@ angular.module('chApp.patients.controllers').controller('PatientDetailsSummaryCo
 
         $scope.dto.vaccine = {};
         $scope.dto.vaccines = [];
+        
+        $scope.dto.socialHistory = {};
 
         (function initProblems (){
             function getProblems(patientId){
@@ -337,6 +339,48 @@ angular.module('chApp.patients.controllers').controller('PatientDetailsSummaryCo
                     patientVaccinesService.updateVaccine(patientId, vaccine).then(function (result) {
                         getVaccines(patientId);
                         patientVaccinesService.closeModals();
+                    }, function (result) {
+                        console.log(arguments);
+                    });
+                }
+            }
+
+        })();
+
+        (function initSocialHistories (){
+            function getSocialHistories(patientId){
+                patientSocialHistoriesService.getSocialHistories(patientId).then(function (data) {
+                    $scope.dto.socialHistory = data[0];
+                    return data;
+                });
+            }
+
+            $scope.$watch("patientId", function(newValue, oldValue){
+                if (newValue){
+                    getSocialHistories(newValue);
+                }
+            });
+
+            $scope.editPatientSocialHistory = function(){
+                $scope.dto.isSocialHistoryEditing = true;
+            };
+            $scope.cancelPatientSocialHistory = function(){
+                $scope.dto.isSocialHistoryEditing = false;
+            };
+            $scope.updatePatientSocialHistory = function(isNew) {
+                var patientId = $scope.patientId;
+                var history = $scope.dto.socialHistory;
+                var isNew = !$scope.dto.socialHistory.id
+                if (isNew) {
+                    history.patientId = patientId;
+                    patientSocialHistoriesService.insertSocialHistory(patientId, history).then(function (result) {
+                        getSocialHistories(patientId);
+                    }, function (result) {
+                        console.log(arguments);
+                    });
+                } else {
+                    patientSocialHistoriesService.updateSocialHistory(patientId, history).then(function (result) {
+                        getSocialHistories(patientId);
                     }, function (result) {
                         console.log(arguments);
                     });

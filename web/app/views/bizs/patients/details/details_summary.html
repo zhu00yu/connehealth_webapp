@@ -1507,6 +1507,156 @@
 
 </div>
 <div class="col-md-6">
+    <div panel-box-directive>
+        <div panel-box-header-directive header-title="社交关系"></div>
+        <div panel-box-content-directive class="pagination2" style="min-height: 363px;" >
+            <div style="padding-bottom: 30px;">
+                <div class="row" ng-hide="dto.isSocialHistoryEditing">
+                    <div class="col-md-6">
+                        <dl class="dl-horizontal">
+                            <dt>婚姻状况</dt><dd>{{dto.socialHistory.maritalStatus}}</dd>
+                            <dt>宗教信仰</dt><dd>{{dto.socialHistory.religion}}</dd>
+                            <dt>吸烟状态</dt><dd>{{dto.socialHistory.smokingStatus}}</dd>
+                            <dt>喝咖啡</dt><dd>{{dto.socialHistory.coffeeStatus}}</dd>
+                            <dt>HIV状态</dt><dd>{{dto.socialHistory.hivStatus}}</dd>
+                        </dl>
+                    </div>
+                    <div class="col-md-6">
+                        <dl class="dl-horizontal">
+                            <dt>职业</dt><dd>{{dto.socialHistory.occupation}}</dd>
+                            <dt>锻炼情况</dt><dd>{{dto.socialHistory.sportStatus}}</dd>
+                            <dt>个人爱好</dt><dd>{{dto.socialHistory.hobby}}</dd>
+                            <dt>饮酒</dt><dd>{{dto.socialHistory.drinkStatus}}</dd>
+                            <dt>毒品使用</dt><dd>{{dto.socialHistory.drugStatus}}</dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="row" ng-hide="dto.isSocialHistoryEditing">
+                    <div class="col-md-12">
+                        <dl class="dl-horizontal">
+                            <dt>备注</dt><dd>{{dto.socialHistory.memo}}</dd>
+                        </dl>
+                    </div>
+                </div>
+                <form role="form">
+                    <div class="row" ng-show="dto.isSocialHistoryEditing">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>婚姻状况</label>
+                                <div class="prepend-icon">
+                                    <select select2-directive ng-model="dto.socialHistory.maritalStatus" init-value="{{dto.socialHistory.maritalStatus}}" class="form-control form-white" data-placeholder="婚姻状况">
+                                        <option>单身</option>
+                                        <option>已婚</option>
+                                        <option>离异</option>
+                                        <option>再婚</option>
+                                        <option>丧偶</option>
+                                        <option>未知</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>宗教信仰</label>
+                                <div class="prepend-icon">
+                                    <select select2-directive ng-model="dto.socialHistory.religion" init-value="{{dto.socialHistory.religion}}" class="form-control form-white" data-placeholder="宗教信仰">
+                                        <option>佛教</option>
+                                        <option>道教</option>
+                                        <option>伊斯兰教</option>
+                                        <option>基督教</option>
+                                        <option>天主教</option>
+                                        <option>未知</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>吸烟状态</label>
+                                <div class="prepend-icon">
+                                    <select select2-directive ng-model="dto.socialHistory.smokingStatus" init-value="{{dto.socialHistory.smokingStatus}}" class="form-control form-white" data-placeholder="吸烟状态">
+                                        <option>从不吸烟</option>
+                                        <option>以前吸烟，现在戒了</option>
+                                        <option>偶尔吸烟</option>
+                                        <option>现在每天吸烟</option>
+                                        <option>吸烟严重</option>
+                                        <option>未知</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>喝咖啡</label>
+                                <div class="prepend-icon">
+                                    <select select2-directive ng-model="dto.socialHistory.coffeeStatus" init-value="{{dto.socialHistory.coffeeStatus}}" class="form-control form-white" data-placeholder="喝咖啡">
+                                        <option>偶尔喝</option>
+                                        <option>不喝</option>
+                                        <option>每天喝</option>
+                                        <option>未知</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>HIV状态</label>
+                                <div class="prepend-icon">
+                                    <select select2-directive ng-model="dto.socialHistory.hivStatus" init-value="{{dto.socialHistory.hivStatus}}" class="form-control form-white" data-placeholder="喝咖啡">
+                                        <option>阳性</option>
+                                        <option>阴性</option>
+                                        <option>未知</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>职业</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="dto.socialHistory.occupation" class="form-control form-white" placeholder="职业">
+                                    <i class="icon-lock"></i>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>锻炼情况</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="dto.socialHistory.sportStatus" class="form-control form-white" placeholder="锻炼情况">
+                                    <i class="icon-lock"></i>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>个人爱好</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="dto.socialHistory.hobby" class="form-control form-white" placeholder="个人爱好">
+                                    <i class="icon-lock"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>饮酒状态</label>
+                                <div class="prepend-icon">
+                                    <select select2-directive ng-model="dto.socialHistory.hivStatus" init-value="{{dto.socialHistory.hivStatus}}" class="form-control form-white" data-placeholder="饮酒状态">
+                                        <option>从不饮酒</option>
+                                        <option>偶尔饮酒</option>
+                                        <option>酗酒</option>
+                                        <option>未知</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>毒品使用</label>
+                                <div class="prepend-icon">
+                                    <input type="text" ng-model="dto.socialHistory.drugStatus" class="form-control form-white" placeholder="毒品使用">
+                                    <i class="icon-lock"></i>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button type="button" class="btn btn-primary" ng-hide="dto.isSocialHistoryEditing" ng-click="editPatientSocialHistory()">编辑</button>
+                        <button type="button" class="btn btn-primary" ng-show="dto.isSocialHistoryEditing" ng-click="updatePatientSocialHistory()">保存</button>
+                        <button type="button" class="btn btn-primary" ng-show="dto.isSocialHistoryEditing" ng-click="cancelPatientSocialHistory()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 </div>
